@@ -3,15 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy | HarbourCloud</title>
-    <meta
-      name="description"
-      content="HarbourCloud privacy notice for website enquiries and service communications."
-    />
+    <title>Privacy Policy | HarbourCloud</title>
+    <meta name="description" content="Privacy policy for HarbourCloud services" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -19,60 +16,84 @@
   <body>
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="logo" href="index.html" aria-label="HarbourCloud home">
+        <a class="logo" href="/" aria-label="HarbourCloud home">
           <span class="logo-mark" aria-hidden="true">HC</span>
           <span>HarbourCloud</span>
         </a>
-        <a class="btn btn-secondary" href="index.html#contact">Contact</a>
       </div>
     </header>
 
-    <main class="section">
-      <div class="container narrow">
-        <p class="eyebrow">Privacy</p>
-        <h1>Privacy notice</h1>
-        <p class="lead">
-          HarbourCloud uses enquiry details you submit (name, work email, company, service intent,
-          and message) to respond to your request and provide service information.
-        </p>
+    <main class="container" style="padding: 4rem 0;">
+      <h1>Privacy Policy</h1>
+      <p><em>Last updated: February 2026</em></p>
 
-        <div class="grid" style="margin-top: 1.5rem">
-          <article class="card">
-            <h3>What we collect</h3>
-            <p>Basic contact and business context you provide through the website form or email.</p>
-          </article>
-          <article class="card">
-            <h3>How we use it</h3>
-            <p>
-              To assess your enquiry, contact you about relevant services, and manage commercial
-              follow-up.
-            </p>
-          </article>
-          <article class="card">
-            <h3>How to request changes</h3>
-            <p>
-              Contact <a href="mailto:sales@harbourcloud.com.au">sales@harbourcloud.com.au</a> to
-              request access, correction, or deletion of submitted details.
-            </p>
-          </article>
-        </div>
-      </div>
+      <h2>Information We Collect</h2>
+      <p>When you contact us through our website forms, we collect:</p>
+      <ul>
+        <li>Name</li>
+        <li>Email address</li>
+        <li>Company information</li>
+        <li>Service interest</li>
+        <li>Additional details you provide in your message</li>
+      </ul>
+
+      <h2>How We Use Your Information</h2>
+      <p>We use the information you provide to:</p>
+      <ul>
+        <li>Respond to your inquiries</li>
+        <li>Provide requested services</li>
+        <li>Communicate about our services</li>
+        <li>Improve our offerings</li>
+      </ul>
+
+      <h2>Data Protection</h2>
+      <p>We implement appropriate security measures to protect your information against unauthorized access, alteration, disclosure, or destruction.</p>
+
+      <h2>Sharing Information</h2>
+      <p>We do not sell, trade, or rent your personal information to third parties. We may share information with trusted service providers who assist us in operating our website or conducting business.</p>
+
+      <h2>Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access your personal information</li>
+        <li>Request correction of inaccurate information</li>
+        <li>Request deletion of your information</li>
+        <li>Object to processing of your information</li>
+      </ul>
+
+      <h2>Contact Us</h2>
+      <p>If you have questions about this privacy policy, please contact us at <a href="mailto:privacy@harbourcloud.com.au">privacy@harbourcloud.com.au</a>.</p>
+
+      <p><a href="/">← Back to Home</a></p>
     </main>
 
     <footer class="site-footer">
       <div class="container footer-grid">
-        <div>
+        <div class="footer-about">
           <p><strong>HarbourCloud Pty Ltd</strong></p>
-          <p>Sydney, Australia</p>
+          <p>Cloud, licensing, and security services for Australian organizations.</p>
         </div>
-        <div>
-          <p><a href="index.html">Home</a></p>
-          <p><a href="index.html#services">Service Tracks</a></p>
+        <div class="footer-contact">
+          <p>Email: <a href="mailto:sales@harbourcloud.com.au">sales@harbourcloud.com.au</a></p>
+          <p>Sydney, Australia</p>
+          <p>ABN: 12 345 678 901</p>
+        </div>
+        <div class="footer-links">
+          <p><a href="privacy.html">Privacy Policy</a></p>
+          <p><a href="#top">Back to top</a></p>
         </div>
       </div>
       <p class="copyright">© <span id="year"></span> HarbourCloud. All rights reserved.</p>
     </footer>
 
-    <script src="assets/js/main.js"></script>
+    <script>
+      // Simple script to update year in footer
+      document.addEventListener('DOMContentLoaded', function() {
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+          yearSpan.textContent = new Date().getFullYear();
+        }
+      });
+    </script>
   </body>
 </html>

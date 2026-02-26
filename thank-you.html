@@ -4,36 +4,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thank You | HarbourCloud</title>
-    <meta
-      name="description"
-      content="Thank you for contacting HarbourCloud. We will respond within one business day."
-    />
+    <meta name="description" content="Thank you for contacting HarbourCloud" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
-    <main class="section">
-      <div class="container narrow">
-        <article class="card" style="padding: 2rem">
-          <p class="eyebrow">Request received</p>
-          <h1>Thanks — we’ll be in touch shortly.</h1>
-          <p class="lead">
-            Your enquiry has been submitted. A HarbourCloud specialist will respond within one
-            business day.
-          </p>
-          <div class="actions" style="margin-top: 1.25rem">
-            <a class="btn btn-primary" href="index.html">Back to homepage</a>
-            <a class="btn btn-secondary" href="mailto:sales@harbourcloud.com.au">Email us directly</a>
-          </div>
-        </article>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="logo" href="/" aria-label="HarbourCloud home">
+          <span class="logo-mark" aria-hidden="true">HC</span>
+          <span>HarbourCloud</span>
+        </a>
       </div>
+    </header>
+
+    <main class="container" style="padding: 4rem 0; text-align: center; max-width: 600px; margin: 0 auto;">
+      <h1>Thank You!</h1>
+      <p style="font-size: 1.2rem; margin: 1.5rem 0; color: #47566d;">We've received your request and will be in touch shortly.</p>
+      
+      <div style="background: white; border-radius: 16px; padding: 2rem; margin: 2rem 0; border: 1px solid #d1dce8; text-align: left;">
+        <h2 style="margin-top: 0;">What happens next:</h2>
+        <ul style="padding-left: 1.5rem;">
+          <li>We'll review your request within 24 hours</li>
+          <li>One of our specialists will contact you to schedule your consultation</li>
+          <li>You'll receive a confirmation email with details</li>
+        </ul>
+      </div>
+      
+      <p style="margin-top: 2rem;"><a href="/" class="btn btn-primary" style="display: inline-block;">Return to Home</a></p>
     </main>
 
-    <script src="assets/js/main.js"></script>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-about">
+          <p><strong>HarbourCloud Pty Ltd</strong></p>
+          <p>Cloud, licensing, and security services for Australian organizations.</p>
+        </div>
+        <div class="footer-contact">
+          <p>Email: <a href="mailto:sales@harbourcloud.com.au">sales@harbourcloud.com.au</a></p>
+          <p>Sydney, Australia</p>
+          <p>ABN: 12 345 678 901</p>
+        </div>
+        <div class="footer-links">
+          <p><a href="privacy.html">Privacy Policy</a></p>
+          <p><a href="#top">Back to top</a></p>
+        </div>
+      </div>
+      <p class="copyright">© <span id="year"></span> HarbourCloud. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // Simple script to update year in footer
+      document.addEventListener('DOMContentLoaded', function() {
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+          yearSpan.textContent = new Date().getFullYear();
+        }
+      });
+    </script>
   </body>
 </html>
