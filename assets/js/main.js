@@ -1,27 +1,26 @@
 // Smooth scrolling for anchor links
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", (event) => {
     const targetId = anchor.getAttribute("href");
-    if (!targetId || targetId === "#" || !document.querySelector(targetId)) return;
+    if (!targetId || targetId === "#") return;
 
-    event.preventDefault();
-    
     const targetElement = document.querySelector(targetId);
     if (!targetElement) return;
 
-    const offsetTop = targetElement.offsetTop - 72; // Account for fixed header height
+    event.preventDefault();
+    
+    // Account for fixed navbar (70px)
+    const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 70;
     
     window.scrollTo({
       top: offsetTop,
-      behavior: prefersReducedMotion ? "auto" : "smooth"
+      behavior: "smooth"
     });
   });
 });
 
 // Navigation highlighting based on scroll position
-const sectionIds = ["ai", "microsoft", "solutions", "contact"];
+const sectionIds = ["intelligence", "licensing", "infrastructure", "contact"];
 const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
 
 const setActiveNav = () => {
@@ -42,42 +41,17 @@ const setActiveNav = () => {
   }
 
   navLinks.forEach((link) => {
-    const target = link.getAttribute("href")?.substring(1); // Remove # prefix
+    const target = link.getAttribute("href")?.substring(1);
     if (target === activeId) {
-      link.style.color = "white";
+      link.style.color = "var(--fg)";
     } else {
-      link.style.color = "var(--text-secondary)";
+      link.style.color = "var(--fg-muted)";
     }
   });
 };
 
 window.addEventListener("scroll", setActiveNav, { passive: true });
 document.addEventListener("DOMContentLoaded", setActiveNav);
-
-// Intersection Observer for "reveal" animations
-const revealElements = document.querySelectorAll(".reveal");
-
-if (!prefersReducedMotion && "IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { 
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px"
-    }
-  );
-
-  revealElements.forEach((el) => observer.observe(el));
-} else {
-  // Fallback
-  revealElements.forEach((el) => el.classList.add("is-visible"));
-}
 
 // Set current year in footer
 document.addEventListener("DOMContentLoaded", () => {
@@ -86,15 +60,3 @@ document.addEventListener("DOMContentLoaded", () => {
     yearElement.textContent = new Date().getFullYear();
   }
 });
-
-// Header scroll effect (add border/shadow when scrolled)
-const header = document.querySelector('.site-header');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) {
-    header.style.background = 'rgba(8, 10, 15, 0.95)';
-    header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
-  } else {
-    header.style.background = 'var(--glass-bg)';
-    header.style.boxShadow = 'none';
-  }
-}, { passive: true });
