@@ -1,15 +1,15 @@
 :root {
-  --bg: #000000;
-  --bg-darker: #050505;
-  --fg: #ededed;
-  --fg-muted: #888888;
-  --border: #333333;
-  --border-light: #444444;
-  --accent: #0070f3;
-  --accent-hover: #0056b3;
-  --green: #00ff00;
-  --red: #ff0000;
-  --yellow: #ffff00;
+  --bg: #0f172a;
+  --bg-darker: #020617;
+  --fg: #f8fafc;
+  --fg-muted: #94a3b8;
+  --border: #1e293b;
+  --border-light: #334155;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --green: #10b981;
+  --red: #ef4444;
+  --yellow: #eab308;
   
   --font-sans: 'Inter', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -101,7 +101,7 @@ p { color: var(--fg-muted); font-size: 1.1rem; }
   right: 0;
   height: 70px;
   border-bottom: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(15, 23, 42, 0.8);
   backdrop-filter: blur(10px);
   z-index: 100;
 }
