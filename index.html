@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harbour Cloud | Australia's Cloud Experts</title>
-    <meta name="description" content="Reliable. Local. Trusted. Harbour Cloud provides Microsoft 365 licensing solutions, cloud infrastructure, and cybersecurity based in Australia.">
+    <title>Harbour Cloud | Cloud Infrastructure & Microsoft Licensing Specialists</title>
+    <meta name="description" content="Harbour Cloud helps businesses reduce Microsoft 365 costs, deploy secure cloud infrastructure, and protect applications with enterprise-grade security.">
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <div class="grid-background"></div>
-    
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="brand">
@@ -24,14 +22,15 @@
                 <span>Harbour Cloud</span>
             </a>
             <div class="nav-links">
-                <a href="#licensing">Licensing</a>
-                <a href="#infrastructure">Infrastructure</a>
+                <a href="#licensing">Microsoft Licensing</a>
+                <a href="#architecture">Cloud Architecture</a>
                 <a href="#security">Security</a>
+                <a href="#about">About</a>
                 <a href="#contact">Contact</a>
             </div>
             <div class="nav-status">
                 <div class="status-dot"></div>
-                <span class="mono-text">SYS.OP</span>
+                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">SYSTEMS ACTIVE</span>
             </div>
         </div>
     </nav>
@@ -39,59 +38,94 @@
     <main>
         <header class="hero">
             <div class="container">
-                <div class="hero-label mono-text">SYDNEY & MELBOURNE // AUSTRALIA</div>
-                <h1 class="hero-title">Australia's Cloud Experts.</h1>
-                <p class="hero-subtitle">Reliable. Local. Trusted. We specialize in Microsoft 365 licensing optimization, secure cloud architecture, and comprehensive cybersecurity solutions.</p>
+                <div class="hero-label">ENTERPRISE CLOUD CONSULTANCY</div>
+                <h1 class="hero-title">Cloud Infrastructure and<br>Microsoft Licensing Specialists</h1>
+                <p class="hero-subtitle">Helping businesses reduce Microsoft 365 costs, deploy secure cloud infrastructure, and protect applications with enterprise-grade security.</p>
                 
                 <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Initialize Project <span class="arrow">→</span></a>
-                    <a href="#licensing" class="btn btn-secondary">View Capabilities</a>
+                    <a href="#licensing" class="btn btn-primary">Request Microsoft 365 Audit</a>
+                    <a href="#contact" class="btn btn-secondary">Book Consultation</a>
                 </div>
                 
                 <div class="metrics-row">
                     <div class="metric">
-                        <div class="metric-value">10<span class="mono-text">%</span></div>
-                        <div class="metric-label">M365 License Savings</div>
+                        <div class="metric-value">10<span>%</span></div>
+                        <div class="metric-label">Microsoft 365 License Savings</div>
                     </div>
                     <div class="metric">
-                        <div class="metric-value">0<span class="mono-text">ms</span></div>
-                        <div class="metric-label">Migration Downtime</div>
+                        <div class="metric-value">0<span></span></div>
+                        <div class="metric-label">Data Migration Required</div>
                     </div>
                     <div class="metric">
-                        <div class="metric-value">24<span class="mono-text">/7</span></div>
-                        <div class="metric-label">Local Support</div>
+                        <div class="metric-value">100<span>%</span></div>
+                        <div class="metric-label">Australian Based Support</div>
                     </div>
                 </div>
             </div>
         </header>
 
+        <section class="section border-top" style="padding: var(--space-md) 0; background: white;">
+            <div class="container">
+                <div style="text-align: center; color: var(--text-light); font-weight: 500; margin-bottom: var(--space-md); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em;">Platforms We Work With</div>
+                <div style="display: flex; justify-content: center; gap: var(--space-xl); flex-wrap: wrap; align-items: center; opacity: 0.6;">
+                    <h3 style="margin: 0; color: var(--text-muted);">Microsoft</h3>
+                    <h3 style="margin: 0; color: var(--text-muted);">AWS</h3>
+                    <h3 style="margin: 0; color: var(--text-muted);">Alibaba Cloud</h3>
+                    <h3 style="margin: 0; color: var(--text-muted);">Cloudflare</h3>
+                </div>
+            </div>
+        </section>
+
         <section id="licensing" class="section border-top">
             <div class="container">
                 <div class="section-header">
-                    <div class="mono-tag">01 // LICENSING</div>
-                    <h2>Microsoft 365 Optimization</h2>
+                    <div class="mono-tag" style="font-family: var(--font-sans); font-weight: 600;">LICENSING</div>
+                    <h2>Microsoft 365 Cost Reduction</h2>
                 </div>
 
                 <div class="offer-card">
                     <div class="offer-content">
                         <h3>Guaranteed 10% Savings</h3>
-                        <p>Transfer your Microsoft 365 billing to Harbour Cloud. Zero downtime. No data migration required. Get an instant 10% reduction on annual prepaid commitments.</p>
-                        <a href="#contact" class="btn btn-primary mt-4">Audit My Licenses</a>
+                        <p>Transfer your Microsoft 365 billing to Harbour Cloud and immediately reduce your operational expenditure. We manage the licensing so you can focus on your business.</p>
+                        
+                        <ul style="list-style: none; margin-top: var(--space-md); padding: 0;">
+                            <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: var(--text-muted);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                10% discount on annual commitments
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: var(--text-muted);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Zero tenant migration required
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: var(--text-muted);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                No service interruption or downtime
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: var(--text-muted);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Same Microsoft infrastructure and support
+                            </li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary mt-4">Request License Audit</a>
                     </div>
-                    <div class="offer-visual">
-                        <div class="terminal">
-                            <div class="terminal-header">
-                                <span class="dot red"></span>
-                                <span class="dot yellow"></span>
-                                <span class="dot green"></span>
+                    <div class="offer-visual" style="background: var(--bg-subtle); padding: var(--space-lg); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                        <h4 style="margin-bottom: var(--space-sm); color: var(--text-main);">Pricing Comparison (Annual)</h4>
+                        <div style="background: white; border-radius: var(--radius-sm); border: 1px solid var(--border-color); overflow: hidden;">
+                            <div style="display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border-color); background: var(--bg-main);">
+                                <span style="font-weight: 600; color: var(--text-muted);">Plan Type</span>
+                                <span style="font-weight: 600; color: var(--text-muted);">Harbour Cloud</span>
                             </div>
-                            <div class="terminal-body mono-text">
-                                > analyzing current tenant...<br>
-                                > 50x M365 Business Premium<br>
-                                > 15x E3 Enterprise<br>
-                                > calculating optimization...<br>
-                                <span class="text-green">> 10% cost reduction applied</span><br>
-                                > status: zero downtime transfer ready
+                            <div style="display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border-color);">
+                                <span>Microsoft 365 Business Premium</span>
+                                <span style="color: var(--green); font-weight: 600;">-10%</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border-color);">
+                                <span>Office 365 E3 / E5</span>
+                                <span style="color: var(--green); font-weight: 600;">-10%</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 16px;">
+                                <span>Microsoft 365 Copilot</span>
+                                <span style="color: var(--green); font-weight: 600;">-10%</span>
                             </div>
                         </div>
                     </div>
@@ -99,35 +133,35 @@
             </div>
         </section>
 
-        <section id="infrastructure" class="section border-top">
+        <section id="architecture" class="section border-top">
             <div class="container">
                 <div class="section-header">
-                    <div class="mono-tag">02 // INFRASTRUCTURE</div>
-                    <h2>Cloud & Architecture</h2>
+                    <div class="mono-tag" style="font-family: var(--font-sans); font-weight: 600;">SOLUTIONS</div>
+                    <h2>Cloud Architecture & Migration</h2>
                 </div>
                 
                 <div class="bento-layout">
                     <div class="bento-box featured">
                         <div class="box-content">
-                            <div class="mono-text highlight">CLOUD MIGRATION</div>
-                            <h3>Office 365 Migration</h3>
-                            <p>Seamless transition and managed support. We handle the complexity of migrating your business to the cloud with minimal disruption to your operations.</p>
+                            <div class="highlight" style="font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">Cloud Architecture</div>
+                            <h3>Enterprise Infrastructure Design</h3>
+                            <p>Design and deployment of resilient, high-availability infrastructure across AWS, Azure, and Alibaba Cloud. We build foundations that scale with your business while maintaining strict security boundaries.</p>
                         </div>
                     </div>
                     
                     <div class="bento-box">
                         <div class="box-content">
                             <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                            <h3>Cloud & Infrastructure</h3>
-                            <p>Modernizing IT with scalable cloud platforms. Architectural design, deployment, and management of resilient, high-availability infrastructure.</p>
+                            <h3>Cloud Migration</h3>
+                            <p>Seamless migration from on-premise or legacy hosting environments to modern cloud platforms with minimal disruption to your operations.</p>
                         </div>
                     </div>
                     
                     <div class="bento-box">
                         <div class="box-content">
                             <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                            <h3>Cost Optimisation</h3>
-                            <p>Analyzing usage to maximize savings. Strict cost controls and usage telemetry ensure your cloud scale doesn't result in unpredictable spend.</p>
+                            <h3>Cost Optimization</h3>
+                            <p>Continuous analysis and architecture improvements to reduce unnecessary cloud spending and maximize your return on infrastructure investment.</p>
                         </div>
                     </div>
                 </div>
@@ -137,25 +171,44 @@
         <section id="security" class="section border-top">
             <div class="container">
                 <div class="section-header">
-                    <div class="mono-tag">03 // SECURITY</div>
-                    <h2>Secure Foundations</h2>
+                    <div class="mono-tag" style="font-family: var(--font-sans); font-weight: 600;">SECURITY</div>
+                    <h2>Enterprise-Grade Protection</h2>
                 </div>
 
                 <div class="grid-3">
                     <div class="card">
-                        <div class="card-icon">CYBER</div>
-                        <h3>Cybersecurity & Compliance</h3>
-                        <p>Implementation of threat defense, identity management, and proactive audit readiness controls.</p>
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>Cloudflare Integration</h3>
+                        <p>Implementation of Cloudflare Web Application Firewall (WAF), DDoS protection, and edge performance optimization.</p>
                     </div>
                     <div class="card">
-                        <div class="card-icon">WAF</div>
-                        <h3>Cloudflare Managed Security</h3>
-                        <p>Enterprise DNS management, DDoS mitigation, and edge performance optimization.</p>
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <h3>Zero Trust Access</h3>
+                        <p>Modernize your remote workforce security with Zero Trust network architecture, replacing vulnerable legacy VPNs.</p>
                     </div>
                     <div class="card">
-                        <div class="card-icon">LOCAL</div>
-                        <h3>Australian Based</h3>
-                        <p>Data sovereignty and compliance handled locally. Independent, jargon-free, and responsive support.</p>
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        </div>
+                        <h3>Compliance & Audit</h3>
+                        <p>Implementation of Essential Eight controls, identity management, and proactive threat defense to ensure audit readiness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section border-top">
+            <div class="container">
+                <div class="contact-layout" style="grid-template-columns: 1fr;">
+                    <div class="contact-info" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                        <h2>About Harbour Cloud</h2>
+                        <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8;">
+                            Harbour Cloud is a Sydney-based cloud consultancy specializing in Microsoft licensing optimization, secure cloud architecture, and global infrastructure deployment. We partner with IT managers, CTOs, and enterprise businesses to modernize their infrastructure and dramatically reduce operational costs without sacrificing performance or security.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -165,52 +218,57 @@
             <div class="container">
                 <div class="contact-layout">
                     <div class="contact-info">
-                        <h2>Initiate Connection.</h2>
-                        <p>Discuss your licensing, infrastructure, or security requirements directly with our team.</p>
+                        <h2>Start a Conversation</h2>
+                        <p>Discuss your cloud architecture, Microsoft licensing, or security requirements directly with our Australian engineering team.</p>
                         
                         <div class="contact-methods mt-4">
-                            <div class="method mono-text">
-                                <span class="label">EMAIL</span>
+                            <div class="method">
+                                <span class="label" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">Email</span>
                                 <a href="mailto:support@harbourcloud.com.au">support@harbourcloud.com.au</a>
                             </div>
-                            <div class="method mono-text">
-                                <span class="label">HQ</span>
-                                <span>Three International Towers<br>Barangaroo, NSW</span>
+                            <div class="method">
+                                <span class="label" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">Office</span>
+                                <span>Three International Towers<br>300 Barangaroo Ave<br>Sydney NSW 2000<br>Australia</span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="contact-form-container">
                         <form class="tech-form" action="https://formsubmit.co/support@harbourcloud.com.au" method="POST">
-                            <input type="hidden" name="_subject" value="Harbour Cloud Inquiry">
+                            <input type="hidden" name="_subject" value="Harbour Cloud Business Inquiry">
                             
                             <div class="form-group">
-                                <label class="mono-text">IDENTIFIER [NAME]</label>
-                                <input type="text" name="name" required>
+                                <label>Name</label>
+                                <input type="text" name="name" required placeholder="John Doe">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Company</label>
+                                <input type="text" name="company" required placeholder="Acme Corporation">
                             </div>
                             
                             <div class="form-group">
-                                <label class="mono-text">DOMAIN [EMAIL]</label>
-                                <input type="email" name="email" required>
+                                <label>Email</label>
+                                <input type="email" name="email" required placeholder="john@company.com">
                             </div>
                             
                             <div class="form-group">
-                                <label class="mono-text">TARGET_VECTOR [SERVICE]</label>
+                                <label>Service Interested</label>
                                 <select name="service" required>
-                                    <option value="">-- SELECT PROTOCOL --</option>
-                                    <option value="m365_10pct">M365 10% Discount Transfer</option>
-                                    <option value="infrastructure">Cloud Infrastructure</option>
-                                    <option value="security">Security & Cloudflare</option>
-                                    <option value="other">Other Inquiry</option>
+                                    <option value="">-- Select a Service --</option>
+                                    <option value="m365_audit">Microsoft 365 License Audit (10% Discount)</option>
+                                    <option value="cloud_architecture">Cloud Architecture & Migration</option>
+                                    <option value="security">Cloudflare & Security</option>
+                                    <option value="other">General Consulting</option>
                                 </select>
                             </div>
                             
                             <div class="form-group">
-                                <label class="mono-text">PAYLOAD [DETAILS]</label>
-                                <textarea name="message" rows="4"></textarea>
+                                <label>Message</label>
+                                <textarea name="message" rows="4" placeholder="How can we help your business?"></textarea>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary w-full">TRANSMIT REQUEST</button>
+                            <button type="submit" class="btn btn-primary w-full">Send Message</button>
                         </form>
                     </div>
                 </div>
@@ -222,8 +280,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="brand">Harbour Cloud Pty Ltd © <span id="year"></span></div>
-                <div class="mono-text footer-details">
-                    <a href="privacy.html">PRIVACY_POLICY</a>
+                <div class="footer-details">
+                    <a href="privacy.html">Privacy Policy</a>
                 </div>
             </div>
         </div>

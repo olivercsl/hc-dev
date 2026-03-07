@@ -20,7 +20,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // Navigation highlighting based on scroll position
-const sectionIds = ["licensing", "infrastructure", "security", "contact"];
+const sectionIds = ["licensing", "architecture", "security", "about", "contact"];
 const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
 
 const setActiveNav = () => {
