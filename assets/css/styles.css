@@ -42,17 +42,7 @@ body {
 
 /* Grid Background */
 .grid-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity: 0.15;
-  z-index: -1;
-  pointer-events: none;
+  display: none;
 }
 
 .container {
