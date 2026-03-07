@@ -1,292 +1,1204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harbour Cloud | Cloud Infrastructure & Microsoft Licensing Specialists</title>
-    <meta name="description" content="Harbour Cloud helps businesses reduce Microsoft 365 costs, deploy secure cloud infrastructure, and protect applications with enterprise-grade security.">
-    <meta name="robots" content="index, follow">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harbour Cloud | Cloud Infrastructure & Microsoft Licensing Specialists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #112240;
+    --blue: #0057FF;
+    --blue-light: #3D7BFF;
+    --blue-pale: #EBF0FF;
+    --white: #FFFFFF;
+    --surface: #F5F7FB;
+    --text: #1A2340;
+    --muted: #5A6580;
+    --border: #E0E6F0;
+    --radius: 12px;
+    --shadow: 0 2px 16px rgba(0,40,120,0.08);
+    --shadow-hover: 0 8px 32px rgba(0,40,120,0.14);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3,h4 { font-family: 'Sora', sans-serif; line-height: 1.2; }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,40,120,0.10); }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 68px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--navy);
+  }
+  .nav-logo img { height: 38px; width: auto; }
+  .nav-logo-text { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 17px; color: var(--navy); }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-size: 14px; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+  .btn-nav {
+    background: var(--blue); color: #fff !important;
+    padding: 10px 20px; border-radius: 8px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .btn-nav:hover { background: var(--blue-light) !important; color: #fff !important; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,87,255,0.3); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 140px 32px 100px;
+    background: var(--white);
+    position: relative; overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    pointer-events: none;
+  }
+  .hero-grid svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+
+  /* Two-column hero layout */
+  .hero-two-col {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 56px;
+    align-items: center;
+    margin-bottom: 56px;
+  }
+  .hero-left { }
+  .hero-right { }
+
+  /* AI comparison card */
+  .ai-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 4px 32px rgba(0,40,120,0.10);
+    overflow: hidden;
+  }
+  .ai-card-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ai-card-label {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--blue); margin-bottom: 4px;
+  }
+  .ai-card-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--navy);
+  }
+  .ai-table { }
+  .ai-table-head {
+    display: grid; grid-template-columns: 1fr 72px 72px;
+    padding: 10px 24px;
+    background: var(--surface);
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--muted);
+  }
+  .ai-table-head span:not(:first-child) { text-align: right; }
+  .ai-table-row {
+    display: grid; grid-template-columns: 1fr 72px 72px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    transition: background 0.15s;
+  }
+  .ai-table-row:hover { background: var(--surface); }
+  .ai-row-highlight { background: rgba(0,87,255,0.02); }
+  .ai-row-best { background: rgba(0,87,255,0.04); }
+  .ai-row-best:hover { background: rgba(0,87,255,0.07); }
+  .ai-model-name { display: flex; flex-direction: column; gap: 3px; }
+  .ai-model-label { font-size: 14px; font-weight: 600; color: var(--text); }
+  .ai-model-sub { font-size: 11px; color: var(--muted); }
+  .ai-pill {
+    display: inline-block;
+    background: var(--blue-pale); color: var(--blue);
+    font-size: 10px; font-weight: 700;
+    padding: 2px 8px; border-radius: 10px;
+    width: fit-content;
+  }
+  .ai-pill-best {
+    background: #DCFCE7; color: #166534;
+  }
+  .ai-price {
+    font-size: 13px; font-weight: 600;
+    color: var(--muted); text-align: right;
+  }
+  .ai-price-good { color: var(--blue); }
+  .ai-price-best { color: #16a34a; font-size: 14px; }
+  .ai-card-footer {
+    padding: 14px 24px;
+    background: var(--navy);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .ai-saving-badge {
+    font-size: 13px; font-weight: 700; color: #86efac;
+  }
+  .ai-card-note {
+    font-size: 11px; color: rgba(255,255,255,0.4);
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue-pale); color: var(--blue);
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 13px; font-weight: 600;
+    margin-bottom: 28px;
+    border: 1px solid rgba(0,87,255,0.15);
+  }
+  .hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+  .hero h1 {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 800; color: var(--navy);
+    max-width: 760px; margin-bottom: 22px;
+    letter-spacing: -1.5px;
+  }
+  .hero h1 span { color: var(--blue); }
+  .hero p {
+    font-size: 18px; color: var(--muted);
+    max-width: 580px; margin-bottom: 40px;
+    font-weight: 400; line-height: 1.7;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
+  .btn-primary {
+    background: var(--blue); color: #fff;
+    padding: 14px 28px; border-radius: 9px;
+    font-weight: 600; font-size: 15px;
+    text-decoration: none; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,87,255,0.35); }
+  .btn-secondary {
+    background: transparent; color: var(--navy);
+    padding: 14px 28px; border-radius: 9px;
+    font-weight: 600; font-size: 15px;
+    text-decoration: none; transition: all 0.2s;
+    border: 1.5px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; max-width: 860px;
+  }
+  .stat {
+    background: var(--white);
+    padding: 24px 28px;
+  }
+  .stat-num {
+    font-family: 'Sora', sans-serif;
+    font-size: 30px; font-weight: 800; color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .stat-num span { color: var(--blue); }
+  .stat-label { font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.4; }
+
+  .platforms {
+    margin-top: 56px; padding-top: 48px;
+    border-top: 1px solid var(--border);
+    max-width: 860px;
+  }
+  .platforms p { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 18px; }
+  .platform-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+  .platform-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 8px;
+    font-size: 13px; font-weight: 600; color: var(--text);
+  }
+  .platform-icon { font-size: 16px; }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 96px 32px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--blue); margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 800; color: var(--navy);
+    letter-spacing: -1px; margin-bottom: 16px;
+  }
+  .section-sub { font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.7; }
+
+  /* ── LICENSING ── */
+  .licensing { background: var(--surface); }
+  .licensing-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-top: 56px; }
+  .feature-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin: 32px 0; }
+  .feature-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 15px; color: var(--text); font-weight: 400;
+  }
+  .check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--blue-pale); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--blue); margin-top: 1px;
+  }
+  .pricing-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .pricing-card-header {
+    background: var(--navy-mid); padding: 18px 24px;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center;
+    border-bottom: 2px solid var(--blue);
+  }
+  .pricing-card-header span { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 1px; }
+  .pricing-card-header .col-hc { color: #fff; font-size: 13px; }
+  .pricing-row {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center;
+    padding: 16px 24px; border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .pricing-row:last-child { border-bottom: none; }
+  .pricing-row .plan-name { font-weight: 500; color: var(--text); }
+  .savings-badge {
+    background: #DCFCE7; color: #166534;
+    padding: 5px 11px; border-radius: 20px;
+    font-size: 12px; font-weight: 700;
+    white-space: nowrap;
+  }
+  .pricing-note { padding: 14px 24px; font-size: 12px; color: var(--muted); background: var(--surface); line-height: 1.6; }
+
+  /* ── CLOUD ARCHITECTURE ── */
+  .arch { background: var(--white); }
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+  .card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px;
+    transition: all 0.25s; cursor: default;
+  }
+  .card:hover { border-color: var(--blue); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+  .card-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--blue-pale); display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 20px;
+  }
+  .card h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ── SECURITY ── */
+  .security { background: var(--navy); }
+  .security .section-label { color: var(--blue-light); }
+  .security .section-title { color: var(--white); }
+  .security .section-sub { color: rgba(255,255,255,0.55); }
+  .security .cards-grid { margin-top: 52px; }
+  .security .card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .security .card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--blue-light);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .security .card-icon { background: rgba(0,87,255,0.2); }
+  .security .card h3 { color: var(--white); }
+  .security .card p { color: rgba(255,255,255,0.55); }
+
+  /* ── ABOUT ── */
+  .about { background: var(--surface); }
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 56px; }
+  .about-text p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
+  .trust-items { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
+  .trust-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 20px; background: var(--white);
+    border: 1px solid var(--border); border-radius: 10px;
+    font-size: 14px; font-weight: 500; color: var(--text);
+  }
+  .trust-item .icon { font-size: 20px; }
+  .about-card {
+    background: var(--navy); border-radius: 16px;
+    padding: 40px; color: white;
+  }
+  .about-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .about-card p { color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.7; margin-bottom: 28px; }
+  .about-address { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; }
+  .about-address p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.8; margin-bottom: 0; }
+  .about-address strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--white); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; margin-top: 56px; }
+  .contact-info { display: flex; flex-direction: column; gap: 24px; }
+  .contact-info-item { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-info-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--blue-pale); display: flex; align-items: center;
+    justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .contact-info-text h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .contact-info-text p, .contact-info-text a { font-size: 14px; color: var(--muted); line-height: 1.6; text-decoration: none; }
+  .contact-info-text a:hover { color: var(--blue); }
+  .contact-form { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 40px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .form-group label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--text);
+    background: var(--white);
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(0,87,255,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .btn-submit {
+    width: 100%; background: var(--blue); color: #fff;
+    border: none; padding: 15px; border-radius: 9px;
+    font-family: 'Sora', sans-serif;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-submit:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,87,255,0.35); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--navy); color: rgba(255,255,255,0.55); }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 56px 32px 32px;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px; padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-brand { }
+  .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .footer-logo img { height: 36px; width: auto; filter: brightness(0) invert(1); }
+  .footer-logo-text { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 16px; color: #fff; }
+  .footer-tagline { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 260px; }
+  .footer-col h4 { font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: #fff; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 28px; font-size: 13px;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-bottom a:hover { color: #fff; }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── AI TOKENS SECTION ── */
+  .ai-tokens { background: var(--surface); }
+  .ai-tokens-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; margin-top: 52px; align-items: start;
+  }
+  .ai-model-cards { display: flex; flex-direction: column; gap: 20px; }
+  .ai-model-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px;
+    box-shadow: var(--shadow);
+  }
+  .ai-model-card--featured {
+    border-color: var(--blue);
+    box-shadow: 0 4px 24px rgba(0,87,255,0.12);
+  }
+  .ai-model-card-top {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 12px; margin-bottom: 20px;
+  }
+  .ai-model-card-name {
+    font-family: 'Sora', sans-serif;
+    font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 4px;
+  }
+  .ai-model-card-sub { font-size: 13px; color: var(--muted); }
+  .ai-model-pricing {
+    display: flex; align-items: center; gap: 0;
+    background: var(--surface); border-radius: 10px;
+    overflow: hidden; margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .ai-model-price-item {
+    flex: 1; padding: 14px 16px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .ai-model-price-divider { width: 1px; background: var(--border); align-self: stretch; }
+  .ai-model-price-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  .ai-model-price-val { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 800; color: var(--navy); }
+  .ai-model-price-unit { font-size: 11px; font-weight: 500; color: var(--muted); margin-left: 2px; }
+  .ai-model-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .ai-model-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text); }
+
+  .ai-compare-table {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow); position: sticky; top: 88px;
+  }
+  .ai-compare-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--navy);
+    padding: 18px 24px 0;
+  }
+  .ai-compare-note {
+    padding: 14px 24px; font-size: 12px; color: var(--muted);
+    background: var(--surface); line-height: 1.7;
+  }
+
+  /* ── HAMBURGER MENU ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center;
+    width: 40px; height: 40px; cursor: pointer; gap: 5px;
+    background: none; border: none; padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--navy); border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 68px; left: 0; right: 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px 28px;
+    z-index: 999;
+    box-shadow: 0 8px 32px rgba(0,40,120,0.12);
+    flex-direction: column; gap: 4px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    text-decoration: none; color: var(--text);
+    font-size: 16px; font-weight: 500;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    display: block; transition: color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--blue); }
+  .mobile-menu .btn-mobile-cta {
+    margin-top: 12px;
+    background: var(--blue); color: #fff !important;
+    padding: 14px 20px; border-radius: 9px;
+    text-align: center; font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    border-bottom: none !important;
+  }
+
+  /* ── TABLET (≤960px) ── */
+  @media (max-width: 960px) {
+    .hero-two-col { grid-template-columns: 1fr; gap: 40px; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .licensing-layout { grid-template-columns: 1fr; gap: 40px; }
+    .about-layout { grid-template-columns: 1fr; gap: 36px; }
+    .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .ai-tokens-layout { grid-template-columns: 1fr; }
+    .ai-compare-table { position: static; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* ── MOBILE (≤680px) ── */
+  @media (max-width: 680px) {
+    /* Nav */
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-inner { padding: 0 20px; }
+
+    /* Sections */
+    section { padding: 64px 20px; }
+    .hero { padding: 110px 20px 64px; }
+
+    /* Hero */
+    .hero-two-col { grid-template-columns: 1fr; gap: 36px; margin-bottom: 36px; }
+    .hero h1 { font-size: 32px; letter-spacing: -1px; }
+    .hero p { font-size: 16px; }
+    .hero-ctas { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; text-align: center; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+    .stat { padding: 18px 16px; }
+    .stat-num { font-size: 24px; }
+    .platforms { margin-top: 40px; padding-top: 36px; max-width: 100%; }
+    .platform-badges { gap: 8px; }
+    .platform-badge { padding: 7px 12px; font-size: 12px; }
+
+    /* AI card in hero */
+    .ai-table-head, .ai-table-row { padding: 10px 16px; }
+
+    /* Section headings */
+    .section-title { font-size: 26px; }
+    .section-sub { font-size: 15px; }
+
+    /* Cards — single column */
+    .cards-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 36px; }
+    .card { padding: 24px; }
+
+    /* Licensing */
+    .feature-list li { font-size: 14px; }
+    .licensing-layout { gap: 32px; margin-top: 40px; }
+
+    /* Pricing table */
+    .pricing-card-header,
+    .pricing-row { padding: 14px 18px; }
+
+    /* AI tokens */
+    .ai-tokens-layout { grid-template-columns: 1fr; gap: 24px; }
+    .ai-model-card { padding: 22px; }
+    .ai-model-price-val { font-size: 17px; }
+
+    /* About */
+    .about-card { padding: 28px; }
+    .about-layout { gap: 32px; margin-top: 40px; }
+
+    /* Contact */
+    .contact-layout { gap: 36px; margin-top: 40px; }
+    .contact-form { padding: 24px 20px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+
+    /* Footer */
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .footer-inner { padding: 44px 20px 24px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .footer-tagline { max-width: 100%; }
+  }
+
+  /* ── SMALL MOBILE (≤380px) ── */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 28px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .stat-num { font-size: 20px; }
+    .hero-badge { font-size: 11px; padding: 5px 11px; }
+  }
+</style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="brand">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="2"/>
-                    <path d="M7 12H17M12 7V17" stroke="currentColor" stroke-width="2"/>
-                </svg>
-                <span>Harbour Cloud</span>
-            </a>
-            <div class="nav-links">
-                <a href="#licensing">Microsoft Licensing</a>
-                <a href="#architecture">Cloud Architecture</a>
-                <a href="#security">Security</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="nav-status">
-                <div class="status-dot"></div>
-                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">SYSTEMS ACTIVE</span>
-            </div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="2"/>
+        <path d="M7 12H17M12 7V17" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span class="nav-logo-text">Harbour Cloud</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#licensing">Microsoft Licensing</a></li>
+      <li><a href="#architecture">Cloud Architecture</a></li>
+      <li><a href="#ai-tokens">AI Tokens</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="btn-nav">Get a Free Audit</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#licensing" onclick="closeMobileMenu()">Microsoft Licensing</a>
+  <a href="#architecture" onclick="closeMobileMenu()">Cloud Architecture</a>
+  <a href="#ai-tokens" onclick="closeMobileMenu()">AI Tokens</a>
+  <a href="#security" onclick="closeMobileMenu()">Security</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#contact" class="btn-mobile-cta" onclick="closeMobileMenu()">Get a Free Audit →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          .geo { fill: none; stroke-width: 1.2; opacity: 0; animation: floatIn 1.2s ease forwards; }
+          .geo-fill { opacity: 0; animation: floatIn 1.2s ease forwards; }
+          @keyframes floatIn { to { opacity: 1; } }
+          @keyframes drift1 { 0%,100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-14px) rotate(3deg); } }
+          @keyframes drift2 { 0%,100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-10px) rotate(-4deg); } }
+          @keyframes drift3 { 0%,100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-18px) rotate(2deg); } }
+          @keyframes drift4 { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+          .d1 { animation: floatIn 1s ease forwards, drift1 7s ease-in-out 1s infinite; }
+          .d2 { animation: floatIn 1s ease forwards, drift2 9s ease-in-out 1.2s infinite; }
+          .d3 { animation: floatIn 1s ease forwards, drift3 11s ease-in-out 0.8s infinite; }
+          .d4 { animation: floatIn 1s ease forwards, drift4 8s ease-in-out 1.5s infinite; }
+          .d5 { animation: floatIn 1s ease forwards, drift2 12s ease-in-out 0.5s infinite; }
+          .d6 { animation: floatIn 1s ease forwards, drift1 10s ease-in-out 2s infinite; }
+        </style>
+      </defs>
+
+      <!-- Large hollow circle top-right -->
+      <circle class="geo d1" cx="1180" cy="120" r="180" stroke="rgba(0,87,255,0.07)" animation-delay="0s"/>
+      <!-- Medium hollow circle, mid-right -->
+      <circle class="geo d2" cx="1320" cy="380" r="100" stroke="rgba(0,87,255,0.05)" style="animation-delay:0.2s"/>
+      <!-- Small filled circle -->
+      <circle class="geo-fill d4" cx="1050" cy="260" r="6" fill="rgba(0,87,255,0.18)" style="animation-delay:0.4s"/>
+      <circle class="geo-fill d5" cx="980" cy="80" r="4" fill="rgba(0,87,255,0.12)" style="animation-delay:0.3s"/>
+      <circle class="geo-fill d3" cx="1260" cy="500" r="5" fill="rgba(61,123,255,0.14)" style="animation-delay:0.6s"/>
+
+      <!-- Hollow square rotated 45deg (diamond), top-left area -->
+      <rect class="geo d3" x="60" y="80" width="90" height="90" rx="6"
+        stroke="rgba(0,87,255,0.06)" transform="rotate(20 105 125)" style="animation-delay:0.1s"/>
+
+      <!-- Smaller rotated square -->
+      <rect class="geo d5" x="200" y="520" width="55" height="55" rx="4"
+        stroke="rgba(0,87,255,0.07)" transform="rotate(-15 227 547)" style="animation-delay:0.5s"/>
+
+      <!-- Triangle (polygon) top-right cluster -->
+      <polygon class="geo d2" points="1100,40 1140,110 1060,110"
+        stroke="rgba(0,87,255,0.06)" style="animation-delay:0.3s"/>
+
+      <!-- Thin long horizontal line, decorative -->
+      <line class="geo d6" x1="900" y1="600" x2="1100" y2="600"
+        stroke="rgba(0,87,255,0.06)" stroke-width="1" style="animation-delay:0.7s"/>
+
+      <!-- Hexagon outline, mid-left -->
+      <polygon class="geo d1"
+        points="110,320 145,300 180,320 180,360 145,380 110,360"
+        stroke="rgba(0,87,255,0.06)" style="animation-delay:0.2s"/>
+
+      <!-- Small dot cluster -->
+      <circle class="geo-fill d4" cx="320" cy="160" r="3.5" fill="rgba(0,87,255,0.10)" style="animation-delay:0.8s"/>
+      <circle class="geo-fill d5" cx="340" cy="175" r="2.5" fill="rgba(0,87,255,0.08)" style="animation-delay:0.9s"/>
+      <circle class="geo-fill d3" cx="305" cy="178" r="2" fill="rgba(0,87,255,0.07)" style="animation-delay:1s"/>
+
+      <!-- Large subtle arc, bottom-left -->
+      <path class="geo d6" d="M -60 650 Q 200 400 460 580"
+        stroke="rgba(0,87,255,0.05)" stroke-width="1.5" style="animation-delay:0.4s"/>
+
+      <!-- Rotated rect, far right -->
+      <rect class="geo d2" x="1350" y="200" width="70" height="70" rx="5"
+        stroke="rgba(61,123,255,0.05)" transform="rotate(30 1385 235)" style="animation-delay:0.6s"/>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-two-col">
+      <!-- LEFT: text + stats -->
+      <div class="hero-left">
+        <div class="hero-badge">Sydney-Based Enterprise Cloud Consultancy</div>
+        <h1>Cloud, Licensing &<br><span>AI Token</span><br>Specialists</h1>
+        <p>Helping Australian businesses reduce Microsoft 365 costs, deploy secure cloud infrastructure, and access premium AI models at wholesale rates.</p>
+        <div class="hero-ctas">
+          <a href="#licensing" class="btn-primary">Request Free Audit →</a>
+          <a href="#ai-tokens" class="btn-secondary">View AI Pricing</a>
         </div>
-    </nav>
-
-    <main>
-        <header class="hero">
-            <div class="container">
-                <div class="hero-label">ENTERPRISE CLOUD CONSULTANCY</div>
-                <h1 class="hero-title">Cloud Infrastructure and<br>Microsoft Licensing Specialists</h1>
-                <p class="hero-subtitle">Helping businesses reduce Microsoft 365 costs, deploy secure cloud infrastructure, and protect applications with enterprise-grade security.</p>
-                
-                <div class="hero-actions">
-                    <a href="#licensing" class="btn btn-primary">Request Microsoft 365 Audit</a>
-                    <a href="#contact" class="btn btn-secondary">Book Consultation</a>
-                </div>
-                
-                <div class="metrics-row">
-                    <div class="metric">
-                        <div class="metric-value">10<span>%</span></div>
-                        <div class="metric-label">Microsoft 365 License Savings</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">0<span></span></div>
-                        <div class="metric-label">Data Migration Required</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">100<span>%</span></div>
-                        <div class="metric-label">Australian Based Support</div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <section class="section border-top" style="padding: var(--space-md) 0; background: white;">
-            <div class="container">
-                <div style="text-align: center; color: var(--text-light); font-weight: 500; margin-bottom: var(--space-md); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em;">Platforms We Work With</div>
-                <div style="display: flex; justify-content: center; gap: var(--space-xl); flex-wrap: wrap; align-items: center; opacity: 0.6;">
-                    <h3 style="margin: 0; color: var(--text-muted);">Microsoft</h3>
-                    <h3 style="margin: 0; color: var(--text-muted);">AWS</h3>
-                    <h3 style="margin: 0; color: var(--text-muted);">Alibaba Cloud</h3>
-                    <h3 style="margin: 0; color: var(--text-muted);">Cloudflare</h3>
-                </div>
-            </div>
-        </section>
-
-        <section id="licensing" class="section border-top">
-            <div class="container">
-                <div class="section-header">
-                    <div class="mono-tag" style="font-family: var(--font-sans); font-weight: 600;">LICENSING</div>
-                    <h2>Microsoft 365 Cost Reduction</h2>
-                </div>
-
-                <div class="offer-card">
-                    <div class="offer-content">
-                        <h3>Guaranteed 10% Savings</h3>
-                        <p>Transfer your Microsoft 365 billing to Harbour Cloud and immediately reduce your operational expenditure. We manage the licensing so you can focus on your business.</p>
-                        
-                        <ul style="list-style: none; margin-top: var(--space-md); padding: 0;">
-                            <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: var(--text-muted);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                10% discount on annual commitments
-                            </li>
-                            <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: var(--text-muted);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                Zero tenant migration required
-                            </li>
-                            <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: var(--text-muted);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                No service interruption or downtime
-                            </li>
-                            <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: var(--text-muted);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                Same Microsoft infrastructure and support
-                            </li>
-                        </ul>
-                        <a href="#contact" class="btn btn-primary mt-4">Request License Audit</a>
-                    </div>
-                    <div class="offer-visual" style="background: var(--bg-subtle); padding: var(--space-lg); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-                        <h4 style="margin-bottom: var(--space-sm); color: var(--text-main);">Pricing Comparison (Annual)</h4>
-                        <div style="background: white; border-radius: var(--radius-sm); border: 1px solid var(--border-color); overflow: hidden;">
-                            <div style="display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border-color); background: var(--bg-main);">
-                                <span style="font-weight: 600; color: var(--text-muted);">Plan Type</span>
-                                <span style="font-weight: 600; color: var(--text-muted);">Harbour Cloud</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border-color);">
-                                <span>Microsoft 365 Business Premium</span>
-                                <span style="color: var(--green); font-weight: 600;">-10%</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border-color);">
-                                <span>Office 365 E3 / E5</span>
-                                <span style="color: var(--green); font-weight: 600;">-10%</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 16px;">
-                                <span>Microsoft 365 Copilot</span>
-                                <span style="color: var(--green); font-weight: 600;">-10%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="architecture" class="section border-top">
-            <div class="container">
-                <div class="section-header">
-                    <div class="mono-tag" style="font-family: var(--font-sans); font-weight: 600;">SOLUTIONS</div>
-                    <h2>Cloud Architecture & Migration</h2>
-                </div>
-                
-                <div class="bento-layout">
-                    <div class="bento-box featured">
-                        <div class="box-content">
-                            <div class="highlight" style="font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">Cloud Architecture</div>
-                            <h3>Enterprise Infrastructure Design</h3>
-                            <p>Design and deployment of resilient, high-availability infrastructure across AWS, Azure, and Alibaba Cloud. We build foundations that scale with your business while maintaining strict security boundaries.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="bento-box">
-                        <div class="box-content">
-                            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                            <h3>Cloud Migration</h3>
-                            <p>Seamless migration from on-premise or legacy hosting environments to modern cloud platforms with minimal disruption to your operations.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="bento-box">
-                        <div class="box-content">
-                            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                            <h3>Cost Optimization</h3>
-                            <p>Continuous analysis and architecture improvements to reduce unnecessary cloud spending and maximize your return on infrastructure investment.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="security" class="section border-top">
-            <div class="container">
-                <div class="section-header">
-                    <div class="mono-tag" style="font-family: var(--font-sans); font-weight: 600;">SECURITY</div>
-                    <h2>Enterprise-Grade Protection</h2>
-                </div>
-
-                <div class="grid-3">
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </div>
-                        <h3>Cloudflare Integration</h3>
-                        <p>Implementation of Cloudflare Web Application Firewall (WAF), DDoS protection, and edge performance optimization.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                        </div>
-                        <h3>Zero Trust Access</h3>
-                        <p>Modernize your remote workforce security with Zero Trust network architecture, replacing vulnerable legacy VPNs.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                        </div>
-                        <h3>Compliance & Audit</h3>
-                        <p>Implementation of Essential Eight controls, identity management, and proactive threat defense to ensure audit readiness.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="section border-top">
-            <div class="container">
-                <div class="contact-layout" style="grid-template-columns: 1fr;">
-                    <div class="contact-info" style="text-align: center; max-width: 800px; margin: 0 auto;">
-                        <h2>About Harbour Cloud</h2>
-                        <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8;">
-                            Harbour Cloud is a Sydney-based cloud consultancy specializing in Microsoft licensing optimization, secure cloud architecture, and global infrastructure deployment. We partner with IT managers, CTOs, and enterprise businesses to modernize their infrastructure and dramatically reduce operational costs without sacrificing performance or security.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section border-top bg-darker">
-            <div class="container">
-                <div class="contact-layout">
-                    <div class="contact-info">
-                        <h2>Start a Conversation</h2>
-                        <p>Discuss your cloud architecture, Microsoft licensing, or security requirements directly with our Australian engineering team.</p>
-                        
-                        <div class="contact-methods mt-4">
-                            <div class="method">
-                                <span class="label" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">Email</span>
-                                <a href="mailto:support@harbourcloud.com.au">support@harbourcloud.com.au</a>
-                            </div>
-                            <div class="method">
-                                <span class="label" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">Office</span>
-                                <span>Three International Towers<br>300 Barangaroo Ave<br>Sydney NSW 2000<br>Australia</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-form-container">
-                        <form class="tech-form" action="https://formsubmit.co/support@harbourcloud.com.au" method="POST">
-                            <input type="hidden" name="_subject" value="Harbour Cloud Business Inquiry">
-                            
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" name="name" required placeholder="John Doe">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Company</label>
-                                <input type="text" name="company" required placeholder="Acme Corporation">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" name="email" required placeholder="john@company.com">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Service Interested</label>
-                                <select name="service" required>
-                                    <option value="">-- Select a Service --</option>
-                                    <option value="m365_audit">Microsoft 365 License Audit (10% Discount)</option>
-                                    <option value="cloud_architecture">Cloud Architecture & Migration</option>
-                                    <option value="security">Cloudflare & Security</option>
-                                    <option value="other">General Consulting</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Message</label>
-                                <textarea name="message" rows="4" placeholder="How can we help your business?"></textarea>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary w-full">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer border-top">
-        <div class="container">
-            <div class="footer-content">
-                <div class="brand">Harbour Cloud Pty Ltd © <span id="year"></span></div>
-                <div class="footer-details">
-                    <a href="privacy.html">Privacy Policy</a>
-                </div>
-            </div>
+        <div class="hero-stats fade-up">
+          <div class="stat">
+            <div class="stat-num"><span>10%</span></div>
+            <div class="stat-label">Microsoft 365<br>License Savings</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">Zero</div>
+            <div class="stat-label">Downtime During<br>Migration</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num"><span>100%</span></div>
+            <div class="stat-label">Australian-Based<br>Support Team</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">84%</div>
+            <div class="stat-label">AI Token Cost<br>Reduction vs Claude</div>
+          </div>
         </div>
-    </footer>
+      </div>
 
-    <script src="assets/js/main.js"></script>
+      <!-- RIGHT: AI model comparison card -->
+      <div class="hero-right fade-up">
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div>
+              <div class="ai-card-label">AI Model Comparison</div>
+              <div class="ai-card-title">Powerful AI. Transparent Pricing.</div>
+            </div>
+          </div>
+          <div class="ai-table">
+            <div class="ai-table-head">
+              <span>Model</span>
+              <span>Input</span>
+              <span>Output</span>
+            </div>
+            <div class="ai-table-row">
+              <div class="ai-model-name">
+                <span class="ai-model-label">Claude Sonnet 4.6</span>
+                <span class="ai-model-sub">Anthropic</span>
+              </div>
+              <span class="ai-price">$3.00</span>
+              <span class="ai-price">$15.00</span>
+            </div>
+            <div class="ai-table-row">
+              <div class="ai-model-name">
+                <span class="ai-model-label">Gemini 2.5 Pro</span>
+                <span class="ai-model-sub">Google</span>
+              </div>
+              <span class="ai-price">$2.00</span>
+              <span class="ai-price">$12.00</span>
+            </div>
+            <div class="ai-table-row ai-row-highlight">
+              <div class="ai-model-name">
+                <span class="ai-model-label">Qwen3-Max</span>
+                <span class="ai-pill">Flagship</span>
+              </div>
+              <span class="ai-price ai-price-good">$1.20</span>
+              <span class="ai-price ai-price-good">$6.00</span>
+            </div>
+            <div class="ai-table-row ai-row-best">
+              <div class="ai-model-name">
+                <span class="ai-model-label">Qwen3.5-Plus</span>
+                <span class="ai-pill ai-pill-best">Best Value</span>
+              </div>
+              <span class="ai-price ai-price-best">$0.40</span>
+              <span class="ai-price ai-price-best">$2.40</span>
+            </div>
+          </div>
+          <div class="ai-card-footer">
+            <div class="ai-saving-badge">~84% lower cost vs Claude Sonnet 4.6</div>
+            <div class="ai-card-note">Pricing in USD per 1M tokens. Annual commitment.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="platforms fade-up">
+      <p>Platforms We Work With</p>
+      <div class="platform-badges">
+        <span class="platform-badge"><span class="platform-icon">🪟</span> Microsoft</span>
+        <span class="platform-badge"><span class="platform-icon">☁️</span> AWS</span>
+        <span class="platform-badge"><span class="platform-icon">🌐</span> Alibaba Cloud</span>
+        <span class="platform-badge"><span class="platform-icon">🛡️</span> Cloudflare</span>
+        <span class="platform-badge"><span class="platform-icon">🤖</span> Qwen AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LICENSING -->
+<section class="licensing" id="licensing">
+  <div class="section-inner">
+    <div class="section-label">Licensing</div>
+    <h2 class="section-title">Microsoft 365 Cost Reduction</h2>
+    <p class="section-sub">Transfer your Microsoft 365 billing to Harbour Cloud and immediately reduce your operational expenditure — guaranteed.</p>
+    <div class="licensing-layout fade-up">
+      <div>
+        <ul class="feature-list">
+          <li><span class="check">✓</span><span><strong>10% discount on annual commitments</strong> — immediate savings on your existing plan</span></li>
+          <li><span class="check">✓</span><span><strong>Zero tenant migration required</strong> — no disruption to your data or users</span></li>
+          <li><span class="check">✓</span><span><strong>No service interruption or downtime</strong> — seamless billing transfer only</span></li>
+          <li><span class="check">✓</span><span><strong>Same Microsoft infrastructure</strong> — identical performance and support</span></li>
+          <li><span class="check">✓</span><span><strong>Free license audit included</strong> — identify over-provisioned seats and waste</span></li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="margin-top:8px; display:inline-flex;">Request a License Audit →</a>
+      </div>
+      <div>
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <span>Plan</span>
+            <span class="col-hc">Your Saving</span>
+          </div>
+          <div class="pricing-row">
+            <span class="plan-name">Microsoft 365 Business Basic</span>
+            <span class="savings-badge">−10%</span>
+          </div>
+          <div class="pricing-row">
+            <span class="plan-name">Microsoft 365 Business Standard</span>
+            <span class="savings-badge">−10%</span>
+          </div>
+          <div class="pricing-row">
+            <span class="plan-name">Microsoft 365 Business Premium</span>
+            <span class="savings-badge">−10%</span>
+          </div>
+          <div class="pricing-row">
+            <span class="plan-name">Office 365 E3 / E5</span>
+            <span class="savings-badge">−10%</span>
+          </div>
+          <div class="pricing-row">
+            <span class="plan-name">Microsoft 365 Copilot</span>
+            <span class="savings-badge">−10%</span>
+          </div>
+          <div class="pricing-note">💡 10% savings apply to annual subscription plans only, based on Microsoft's current list price at time of billing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOUD ARCHITECTURE -->
+<section class="arch" id="architecture">
+  <div class="section-inner">
+    <div class="section-label">Solutions</div>
+    <h2 class="section-title">Cloud Architecture & Migration</h2>
+    <p class="section-sub">Design, deploy, and optimise enterprise infrastructure across AWS, Azure, and Alibaba Cloud — built to scale with your business.</p>
+    <div class="cards-grid fade-up">
+      <div class="card">
+        <div class="card-icon">🏗️</div>
+        <h3>Enterprise Infrastructure Design</h3>
+        <p>Design and deployment of resilient, high-availability infrastructure across AWS, Azure, and Alibaba Cloud. We build foundations that scale with your business while maintaining strict security boundaries.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <h3>Cloud Migration</h3>
+        <p>Seamless migration from on-premise or legacy hosting environments to modern cloud platforms with minimal disruption to your operations and zero data loss.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Cost Optimisation</h3>
+        <p>Continuous analysis and architecture improvements to reduce unnecessary cloud spending and maximise your return on infrastructure investment through right-sizing and reserved capacity planning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="security" id="security">
+  <div class="section-inner">
+    <div class="section-label">Security</div>
+    <h2 class="section-title">Enterprise-Grade Protection</h2>
+    <p class="section-sub">Comprehensive security architecture to protect your applications, workforce, and data against modern threats.</p>
+    <div class="cards-grid fade-up">
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <h3>Cloudflare WAF & DDoS</h3>
+        <p>Implementation of Cloudflare Web Application Firewall, DDoS protection, and edge performance optimisation — managed and monitored by our team.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>Zero Trust Access</h3>
+        <p>Modernise your remote workforce security with Zero Trust network architecture, replacing vulnerable legacy VPNs with identity-based access controls.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✅</div>
+        <h3>Compliance & Audit Readiness</h3>
+        <p>Implementation of Essential Eight controls, identity management, and proactive threat defence to ensure ongoing audit readiness and regulatory compliance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI TOKENS -->
+<section class="ai-tokens" id="ai-tokens">
+  <div class="section-inner">
+    <div class="section-label">AI Tokens</div>
+    <h2 class="section-title">Premium AI at Wholesale Rates</h2>
+    <p class="section-sub">Stop overpaying for AI intelligence. Access Qwen3-Max and Qwen3.5-Plus — top-tier models at a fraction of the cost of Western alternatives.</p>
+
+    <div class="ai-tokens-layout fade-up">
+      <!-- Model cards -->
+      <div class="ai-model-cards">
+        <div class="ai-model-card ai-model-card--featured">
+          <div class="ai-model-card-top">
+            <div>
+              <div class="ai-model-card-name">Qwen3.5-Plus</div>
+              <div class="ai-model-card-sub">Best value for agentic workflows & automation</div>
+            </div>
+            <span class="ai-pill ai-pill-best" style="font-size:11px;padding:4px 10px;">Best Value</span>
+          </div>
+          <div class="ai-model-pricing">
+            <div class="ai-model-price-item">
+              <span class="ai-model-price-label">Input</span>
+              <span class="ai-model-price-val">$0.40<span class="ai-model-price-unit">/1M tokens</span></span>
+            </div>
+            <div class="ai-model-price-divider"></div>
+            <div class="ai-model-price-item">
+              <span class="ai-model-price-label">Output</span>
+              <span class="ai-model-price-val">$2.40<span class="ai-model-price-unit">/1M tokens</span></span>
+            </div>
+          </div>
+          <ul class="ai-model-features">
+            <li><span class="check" style="background:rgba(0,87,255,0.12)">✓</span>Ideal for high-volume agentic tasks</li>
+            <li><span class="check" style="background:rgba(0,87,255,0.12)">✓</span>~84% cheaper than Claude Sonnet 4.6</li>
+            <li><span class="check" style="background:rgba(0,87,255,0.12)">✓</span>Strong reasoning & instruction following</li>
+          </ul>
+          <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;">Get Access →</a>
+        </div>
+
+        <div class="ai-model-card">
+          <div class="ai-model-card-top">
+            <div>
+              <div class="ai-model-card-name">Qwen3-Max</div>
+              <div class="ai-model-card-sub">Flagship model for complex reasoning tasks</div>
+            </div>
+            <span class="ai-pill" style="font-size:11px;padding:4px 10px;">Flagship</span>
+          </div>
+          <div class="ai-model-pricing">
+            <div class="ai-model-price-item">
+              <span class="ai-model-price-label">Input</span>
+              <span class="ai-model-price-val">$1.20<span class="ai-model-price-unit">/1M tokens</span></span>
+            </div>
+            <div class="ai-model-price-divider"></div>
+            <div class="ai-model-price-item">
+              <span class="ai-model-price-label">Output</span>
+              <span class="ai-model-price-val">$6.00<span class="ai-model-price-unit">/1M tokens</span></span>
+            </div>
+          </div>
+          <ul class="ai-model-features">
+            <li><span class="check" style="background:var(--blue-pale)">✓</span>Deep reasoning & complex analysis</li>
+            <li><span class="check" style="background:var(--blue-pale)">✓</span>50% cheaper than Gemini 2.5 Pro output</li>
+            <li><span class="check" style="background:var(--blue-pale)">✓</span>Multilingual including Chinese</li>
+          </ul>
+          <a href="#contact" class="btn-secondary" style="width:100%;text-align:center;margin-top:8px;display:block;">Get Access →</a>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="ai-compare-table">
+        <div class="ai-compare-title">How It Compares</div>
+        <div class="ai-table">
+          <div class="ai-table-head" style="grid-template-columns:1fr 80px 80px;">
+            <span>Model</span><span>Input</span><span>Output</span>
+          </div>
+          <div class="ai-table-row" style="grid-template-columns:1fr 80px 80px;">
+            <div class="ai-model-name"><span class="ai-model-label">Claude Sonnet 4.6</span><span class="ai-model-sub">Anthropic</span></div>
+            <span class="ai-price">$3.00</span><span class="ai-price">$15.00</span>
+          </div>
+          <div class="ai-table-row" style="grid-template-columns:1fr 80px 80px;">
+            <div class="ai-model-name"><span class="ai-model-label">Gemini 2.5 Pro</span><span class="ai-model-sub">Google</span></div>
+            <span class="ai-price">$2.00</span><span class="ai-price">$12.00</span>
+          </div>
+          <div class="ai-table-row ai-row-highlight" style="grid-template-columns:1fr 80px 80px;">
+            <div class="ai-model-name"><span class="ai-model-label">Qwen3-Max</span><span class="ai-pill">Flagship</span></div>
+            <span class="ai-price ai-price-good">$1.20</span><span class="ai-price ai-price-good">$6.00</span>
+          </div>
+          <div class="ai-table-row ai-row-best" style="grid-template-columns:1fr 80px 80px;border-bottom:none;">
+            <div class="ai-model-name"><span class="ai-model-label">Qwen3.5-Plus</span><span class="ai-pill ai-pill-best">Best Value</span></div>
+            <span class="ai-price ai-price-best">$0.40</span><span class="ai-price ai-price-best">$2.40</span>
+          </div>
+        </div>
+        <div class="ai-compare-note">Pricing in USD per 1M tokens. Annual commitment required.<br>Contact us for volume discounts and AUD invoicing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="section-label">About Us</div>
+    <h2 class="section-title">Harbour Cloud</h2>
+    <div class="about-layout fade-up">
+      <div class="about-text">
+        <p>Harbour Cloud is a Sydney-based cloud consultancy specialising in Microsoft licensing optimisation, secure cloud architecture, and global infrastructure deployment.</p>
+        <p>We partner with IT managers, CTOs, and enterprise businesses to modernise their infrastructure and dramatically reduce operational costs without sacrificing performance or security.</p>
+        <div class="trust-items">
+          <div class="trust-item"><span class="icon">🇦🇺</span> 100% Australian owned and operated</div>
+          <div class="trust-item"><span class="icon">🏢</span> Headquartered in Sydney, Barangaroo</div>
+          <div class="trust-item"><span class="icon">⚡</span> Experts in Microsoft, AWS & cloud security</div>
+          <div class="trust-item"><span class="icon">🤝</span> Serving businesses across Sydney, Melbourne & Australia</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <h3>Our Office</h3>
+        <p>Centrally located in the heart of Sydney's financial district — available for on-site visits and in-person consultations.</p>
+        <div class="about-address">
+          <p>
+            <strong>Three International Towers</strong><br>
+            Level 24, 300 Barangaroo Avenue<br>
+            Barangaroo NSW 2000<br>
+            Australia
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Start a Conversation</h2>
+    <p class="section-sub">Discuss your cloud architecture, Microsoft licensing, or security requirements directly with our Australian engineering team.</p>
+    <div class="contact-layout fade-up">
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📧</div>
+          <div class="contact-info-text">
+            <h4>Email</h4>
+            <a href="mailto:hello@harbourcloud.com.au">hello@harbourcloud.com.au</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📍</div>
+          <div class="contact-info-text">
+            <h4>Office</h4>
+            <p>Three International Towers<br>300 Barangaroo Ave<br>Sydney NSW 2000</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">🕐</div>
+          <div class="contact-info-text">
+            <h4>Response Time</h4>
+            <p>We respond to all enquiries within one business day.</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Jane Smith"></div>
+          <div class="form-group"><label>Company</label><input type="text" placeholder="Acme Pty Ltd"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@company.com.au"></div>
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="+61 2 0000 0000"></div>
+        </div>
+        <div class="form-group">
+          <label>Service Interested In</label>
+          <select>
+            <option value="">— Select a service —</option>
+            <option>Microsoft 365 License Audit (10% Discount)</option>
+            <option>Cloud Architecture & Migration</option>
+            <option>Cloudflare & Security</option>
+            <option>General Consulting</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell us about your current setup and what you're looking to achieve..."></textarea>
+        </div>
+        <button class="btn-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: white;">
+            <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="2"/>
+            <path d="M7 12H17M12 7V17" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <span class="footer-logo-text">Harbour Cloud</span>
+        </div>
+        <p class="footer-tagline">Cloud infrastructure and Microsoft licensing specialists for Australian businesses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#licensing">Microsoft Licensing</a></li>
+          <li><a href="#architecture">Cloud Architecture</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#contact">Consulting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Harbour Cloud Pty Ltd | ABN 74 673 268 507</span>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll shadow
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close menu on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 680) closeMobileMenu();
+  });
+
+  // Fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
