@@ -11,7 +11,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     const targetElement = document.querySelector(targetId);
     if (!targetElement) return;
 
-    const offsetTop = targetElement.offsetTop - 64; // Account for fixed header height
+    const offsetTop = targetElement.offsetTop - 72; // Account for fixed header height
     
     window.scrollTo({
       top: offsetTop,
@@ -21,7 +21,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // Navigation highlighting based on scroll position
-const sectionIds = ["ai", "microsoft", "cloud", "contact"];
+const sectionIds = ["ai", "microsoft", "solutions", "contact"];
 const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
 
 const setActiveNav = () => {
@@ -43,13 +43,10 @@ const setActiveNav = () => {
 
   navLinks.forEach((link) => {
     const target = link.getAttribute("href")?.substring(1); // Remove # prefix
-    link.classList.toggle("is-active", target === activeId);
-    
-    // Apple-style active state: adjust opacity
     if (target === activeId) {
-      link.style.opacity = "1";
+      link.style.color = "white";
     } else {
-      link.style.opacity = "0.7";
+      link.style.color = "var(--text-secondary)";
     }
   });
 };
@@ -90,26 +87,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Pre-fill service selection from data attributes
-document.querySelectorAll("[data-service]").forEach((cta) => {
-  cta.addEventListener("click", (e) => {
-    const serviceValue = cta.getAttribute("data-service");
-    const serviceSelect = document.getElementById("service-select");
-    
-    if (serviceValue && serviceSelect) {
-      serviceSelect.value = serviceValue;
-    }
-  });
-});
-
 // Header scroll effect (add border/shadow when scrolled)
 const header = document.querySelector('.site-header');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 10) {
-    header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.05)';
-    header.style.borderBottom = '1px solid rgba(0, 0, 0, 0.05)';
+  if (window.scrollY > 20) {
+    header.style.background = 'rgba(8, 10, 15, 0.95)';
+    header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
   } else {
+    header.style.background = 'var(--glass-bg)';
     header.style.boxShadow = 'none';
-    header.style.borderBottom = '1px solid rgba(0, 0, 0, 0.1)';
   }
 }, { passive: true });
