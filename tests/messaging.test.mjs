@@ -85,9 +85,10 @@ describe('messaging brief: homepage structure', () => {
     assert.match(text, /same (price|cost) as buying (from Microsoft )?direct/i);
   });
 
-  test('names the audience: 20 to 300 staff, financial services', () => {
-    assert.match(text, /20 to 300 staff/);
+  test('speaks to the audience without publishing the staff-count range', () => {
     assert.match(text, /financial services/i);
+    const range = text.match(/\b\d{1,4}\s*(?:to|-|–)\s*\d{1,4}\s*(?:staff|employees|seats|users|people)\b/i);
+    assert.equal(range, null, `staff-count range is internal targeting, not site copy: "${range?.[0]}"`);
   });
 });
 
