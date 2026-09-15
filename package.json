@@ -1,0 +1,9 @@
+{
+  "name": "harbourcloud-site",
+  "private": true,
+  "type": "module",
+  "description": "harbourcloud.com.au static site — tests gate every deploy (dev first, then production)",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.mjs\""
+  }
+}
