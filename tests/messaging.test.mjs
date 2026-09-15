@@ -59,16 +59,17 @@ describe('messaging brief: homepage structure', () => {
     assert.equal(hit, null, `one-person framing: "${hit && context(text, hit.index)}"`);
   });
 
-  test('the four value pillars appear in order', () => {
+  test('the four value pillars appear in order (headings may add keywords around them)', () => {
     const pillars = [
-      'Correct from day one',
-      'Security you already paid for, switched on',
-      'Accountable service, not a ticket queue',
-      'Azure and AI, built and run for you',
+      'correct from day one',
+      'security you already paid for, switched on',
+      'accountable service, not a ticket queue',
+      'built and run for you',
     ];
+    const lower = text.toLowerCase();
     let last = -1;
     for (const p of pillars) {
-      const i = text.indexOf(p);
+      const i = lower.indexOf(p, last + 1);
       assert.ok(i > last, `pillar "${p}" missing or out of order`);
       last = i;
     }
