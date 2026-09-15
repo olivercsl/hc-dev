@@ -45,18 +45,25 @@ describe('messaging brief: homepage structure', () => {
   const text = readableText(html);
   const h1 = readableText(html.match(/<h1[\s\S]*?<\/h1>/i)?.[0] ?? '');
 
-  test('h1 carries the core positioning', () => {
+  test('h1 carries the core positioning: managed, at Microsoft\'s price', () => {
     assert.match(h1, /Microsoft 365/);
     assert.match(h1, /Azure/);
-    assert.match(h1, /senior engineer/i);
+    assert.match(h1, /managed/i);
     assert.match(h1, /Microsoft's own price|same price/i);
+  });
+
+  test('sells a managed service, not a one-person show', () => {
+    assert.match(text, /managed service/i);
+    const oneMan = /\b(?:the|a|your|one) (?:senior )?(?:cloud )?engineer\b|\bone (?:senior )?person\b|\bthe person who\b|\bsenior engineer\b/i;
+    const hit = text.match(oneMan);
+    assert.equal(hit, null, `one-person framing: "${hit && context(text, hit.index)}"`);
   });
 
   test('the four value pillars appear in order', () => {
     const pillars = [
       'Correct from day one',
       'Security you already paid for, switched on',
-      'One senior person, not a ticket queue',
+      'Accountable service, not a ticket queue',
       'Azure and AI, built and run for you',
     ];
     let last = -1;

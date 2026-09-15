@@ -145,9 +145,9 @@ describe('business details', () => {
 describe('calls to action (email only for now)', () => {
   const html = read('index.html');
 
-  test('"Talk to the engineer" in the nav and hero, pointing at contact', () => {
-    assert.match(html.match(/<nav[\s\S]*?<\/nav>/i)[0], /<a[^>]+href="#contact"[^>]*>[^<]*Talk to the engineer/i);
-    assert.match(sectionById(html, 'home'), /<a[^>]+href="#contact"[^>]*>[^<]*Talk to the engineer/i);
+  test('"Talk to an expert" in the nav and hero, pointing at contact', () => {
+    assert.match(html.match(/<nav[\s\S]*?<\/nav>/i)[0], /<a[^>]+href="#contact"[^>]*>[^<]*Talk to an expert/i);
+    assert.match(sectionById(html, 'home'), /<a[^>]+href="#contact"[^>]*>[^<]*Talk to an expert/i);
   });
 
   test('secondary CTA is "Request a security review"', () => {
