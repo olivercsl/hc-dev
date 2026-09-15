@@ -81,24 +81,29 @@ describe('Australian English', () => {
   }
 });
 
-describe('AI services section', () => {
+describe('Azure and AI pillar', () => {
   const html = read('index.html');
-  const ai = sectionById(html, 'ai');
+  const ai = sectionById(html, 'azure-ai');
 
   test('exists and is linked from the navigation', () => {
-    assert.ok(ai, 'section#ai missing');
-    assert.match(html.match(/<nav[\s\S]*?<\/nav>/i)[0], /href="#ai"/);
+    assert.ok(ai, 'section#azure-ai missing');
+    assert.match(html.match(/<nav[\s\S]*?<\/nav>/i)[0], /href="#azure-ai"/);
   });
 
-  test('leads with fully managed Azure AI projects at no extra cost beyond the Azure invoice', () => {
+  test('Azure and AI workloads designed, built and run, included, with predictable cost', () => {
     const t = visibleText(ai);
-    assert.match(t, /Azure/);
-    assert.match(t, /fully managed/i);
+    assert.match(t, /Azure OpenAI/);
+    assert.match(t, /Foundry/);
     assert.match(t, /design/i);
     assert.match(t, /build/i);
-    assert.match(t, /deploy/i);
-    assert.match(t, /no (additional|extra) (cost|fee)/i);
-    assert.match(t, /Azure (invoice|bill)/i);
+    assert.match(t, /(operate|run)/i);
+    assert.match(t, /(cost governance|predictable)/i);
+    assert.match(t, /\bincluded\b/i);
+    assert.match(t, /no additional cost beyond your Azure invoice/i);
+  });
+
+  test('covers Microsoft Copilot readiness', () => {
+    assert.match(visibleText(ai), /Copilot readiness/i);
   });
 
   test('offers local inference clusters on open-source models with agentic workloads', () => {
@@ -115,8 +120,8 @@ describe('AI services section', () => {
 });
 
 describe('business details', () => {
-  test('cloud architecture covers Azure, AWS and Alibaba Cloud', () => {
-    const t = visibleText(sectionById(read('index.html'), 'architecture') ?? '');
+  test('homepage mentions Azure, AWS and Alibaba Cloud', () => {
+    const t = visibleText(read('index.html'));
     for (const p of [/Azure/, /AWS/, /Alibaba Cloud/]) assert.match(t, p);
   });
 
@@ -137,10 +142,26 @@ describe('business details', () => {
   });
 });
 
-describe('calls to action', () => {
-  test('index has a "talk to an expert" CTA pointing at contact', () => {
-    const html = read('index.html');
-    assert.match(html, /<a[^>]+href="#contact"[^>]*>[^<]*talk to an expert/i);
+describe('calls to action (email only for now)', () => {
+  const html = read('index.html');
+
+  test('"Talk to the engineer" in the nav and hero, pointing at contact', () => {
+    assert.match(html.match(/<nav[\s\S]*?<\/nav>/i)[0], /<a[^>]+href="#contact"[^>]*>[^<]*Talk to the engineer/i);
+    assert.match(sectionById(html, 'home'), /<a[^>]+href="#contact"[^>]*>[^<]*Talk to the engineer/i);
+  });
+
+  test('secondary CTA is "Request a security review"', () => {
+    assert.match(visibleText(html), /Request a security review/i);
+  });
+
+  test('contact uses email with a prefilled enquiry template and no form', () => {
+    const contact = sectionById(html, 'contact');
+    assert.ok(contact, 'section#contact missing');
+    assert.doesNotMatch(html, /<form[\s>]/i);
+    const mailto = contact.match(/href="(mailto:hello@harbourcloud\.com\.au\?[^"]+)"/)?.[1];
+    assert.ok(mailto, 'no mailto with subject/body');
+    const body = decodeURIComponent(mailto.replace(/&amp;/g, '&'));
+    for (const field of [/Name/, /Company/, /Staff count/, /Current Microsoft setup/, /on your mind/]) assert.match(body, field);
   });
 });
 

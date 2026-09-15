@@ -82,8 +82,9 @@ try {
         title: document.title,
         h1: document.querySelector('h1')?.innerText.replace(/\\s+/g, ' '),
         h1Count: document.querySelectorAll('h1').length,
-        hasAiSection: !!document.getElementById('ai'),
-        forbiddenText: (text.match(/AI Tokens?|Qwen|\\$\\d|discount|wholesale|pricing/gi) || []),
+        hasAiSection: !!document.getElementById('azure-ai'),
+        forbiddenText: (text.match(/AI Tokens?|Qwen|\\$\\d|discount|wholesale|pricing|cheapest|reseller|—/gi) || []),
+        primaryCta: [...document.querySelectorAll('a[href="#contact"]')].some(a => /Talk to the engineer/i.test(a.innerText)),
         horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1,
         scrollWidth: document.documentElement.scrollWidth,
         brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.src),
@@ -114,7 +115,8 @@ try {
 
     const failures = [];
     if (checks.h1Count !== 1) failures.push('h1 count');
-    if (!checks.hasAiSection) failures.push('no #ai section');
+    if (!checks.hasAiSection) failures.push('no #azure-ai section');
+    if (!checks.primaryCta) failures.push('no "Talk to the engineer" CTA');
     if (checks.forbiddenText.length) failures.push(`forbidden text: ${checks.forbiddenText.join(', ')}`);
     if (checks.horizontalOverflow) failures.push(`horizontal overflow (${checks.scrollWidth}px)`);
     if (checks.brokenImages.length) failures.push(`broken images: ${checks.brokenImages.join(', ')}`);
