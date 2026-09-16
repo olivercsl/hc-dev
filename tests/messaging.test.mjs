@@ -55,6 +55,18 @@ describe('messaging brief: homepage structure', () => {
     assert.match(text, /Cloud Solution Provider/);
   });
 
+  test('hero opens the conversation from the customer\'s pain points', () => {
+    const hero = html.match(/<section[^>]*\sid="home"[\s\S]*?<\/section>/i)?.[0] ?? '';
+    const heroText = readableText(hero);
+    assert.match(heroText, /pain points?|where it hurts|what slows|tell us|all ears|your problem/i);
+    assert.doesNotMatch(heroText, /we find the use cases/i);
+  });
+
+  test('contact invites the problem, not a brief', () => {
+    const contact = html.match(/<section[^>]*\sid="contact"[\s\S]*?<\/section>/i)?.[0] ?? '';
+    assert.match(readableText(contact), /pain points?|all ears|what slows|where the work|problem/i);
+  });
+
   test('sells a managed service, not a one-person show', () => {
     assert.match(text, /managed service/i);
     const oneMan = /\b(?:the|a|your|one) (?:senior )?(?:cloud )?engineer\b|\bone (?:senior )?person\b|\bthe person who\b|\bsenior engineer\b/i;
