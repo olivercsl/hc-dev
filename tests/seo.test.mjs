@@ -1,4 +1,4 @@
-// Keyword placement from seo/keyword-plan.md (homepage map). Keeps copy rewrites from dropping SEO.
+// Keyword placement from seo/keyword-plan.md v2 (AI-led homepage map).
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -24,53 +24,88 @@ const h1 = strip(html.match(/<h1[\s\S]*?<\/h1>/i)?.[0] ?? '');
 const h2s = [...html.matchAll(/<h2[\s\S]*?<\/h2>/gi)].map((m) => strip(m[0]));
 const body = strip(html);
 
-describe('homepage keyword placement', () => {
-  test('title targets managed Microsoft 365 services in Sydney', () => {
-    assert.match(title, /Managed Microsoft 365/);
-    assert.match(title, /Services/);
+describe('homepage keyword placement (AI-led)', () => {
+  test('title targets Azure AI delivery in Sydney', () => {
+    assert.match(title, /Azure AI/);
+    assert.match(title, /(Development|Projects|Consulting)/);
     assert.match(title, /Sydney/);
     assert.match(title, /Harbour Cloud/);
   });
 
-  test('meta description covers managed Microsoft 365, Australia and Microsoft CSP partner', () => {
-    assert.match(description, /Managed Microsoft 365/);
-    assert.match(description, /Australia/);
-    assert.match(description, /Microsoft CSP partner/i);
+  test('meta description covers AI projects on Azure, Australia and private AI', () => {
+    assert.match(description, /AI projects/i);
+    assert.match(description, /Azure/);
+    assert.match(description, /Australian|Australia/);
+    assert.match(description, /(private|on-premises)/i);
   });
 
-  test('h1 leads with "Managed Microsoft 365"', () => {
-    assert.match(h1, /^Managed Microsoft 365\b/);
-    assert.match(h1, /Azure services/);
+  test('h1 leads with Azure AI projects', () => {
+    assert.match(h1, /^Azure AI projects/i);
+    assert.match(h1, /(built and run|design)/i);
   });
 
   test('h2s carry one keyword cluster each', () => {
     const joined = h2s.join(' | ');
-    for (const kw of [/Managed Microsoft 365/, /Microsoft 365 security/, /Microsoft 365 support/, /Azure managed services/, /Microsoft CSP partner/, /financial services/i, /Microsoft 365 expert/]) {
+    for (const kw of [
+      /Azure AI (development|projects)/i,
+      /AI agents/i,
+      /(private|on-premises) AI/i,
+      /Copilot/i,
+      /Managed Microsoft 365/i,
+      /Microsoft CSP partner/i,
+      /financial services/i,
+      /AI and Azure expert|AI expert/i,
+    ]) {
       assert.match(joined, kw, `no h2 matches ${kw}: ${joined}`);
     }
   });
 
-  test('body covers the supporting terms', () => {
-    for (const kw of [/Business Premium/, /\bE3\b/, /\bE5\b/, /Essential Eight/, /conditional access/i, /Intune/, /Entra ID/, /Purview/, /security review/i, /Copilot readiness/i, /Azure OpenAI/, /Azure AI Foundry/, /Azure cost/i, /local LLMs?/i, /Sydney/, /Australia/]) {
+  test('AI clusters lead the page, Microsoft foundation follows', () => {
+    const firstAi = body.search(/Azure AI/i);
+    const firstManaged = body.search(/Managed Microsoft 365/i);
+    assert.ok(firstAi > -1 && firstManaged > -1, 'both themes must appear');
+    assert.ok(firstAi < firstManaged, 'AI must appear before managed Microsoft 365');
+  });
+
+  test('body covers the AI supporting terms', () => {
+    for (const kw of [/Azure OpenAI/, /Azure AI Foundry/, /AI agents?/i, /document/i, /proof of concept/i, /AI readiness/i, /data governance/i, /on-premises/i, /open-source models/i, /local LLMs?/i, /Azure cost/i]) {
       assert.match(body, kw, `body missing ${kw}`);
     }
   });
 
-  test('no keyword stuffing: "Microsoft 365" under 3% of words', () => {
+  test('body keeps the Microsoft supporting terms', () => {
+    for (const kw of [/Business Premium/, /\bE3\b/, /\bE5\b/, /Essential Eight/, /conditional access/i, /Intune/, /Entra ID/, /Purview/, /security review/i, /Copilot readiness/i, /Sydney/, /Australia/]) {
+      assert.match(body, kw, `body missing ${kw}`);
+    }
+  });
+
+  test('no keyword stuffing: neither "AI" nor "Microsoft 365" over 3% of words', () => {
     const words = body.split(' ').length;
-    const hits = (body.match(/Microsoft 365/g) ?? []).length;
-    assert.ok(hits / words < 0.03, `${hits} mentions in ${words} words`);
+    for (const re of [/\bAI\b/g, /Microsoft 365/g]) {
+      const hits = (body.match(re) ?? []).length;
+      assert.ok(hits / words < 0.03, `${re} appears ${hits} times in ${words} words`);
+    }
   });
 });
 
 describe('service schema', () => {
-  test('JSON-LD lists the six services in an OfferCatalog without prices', () => {
+  test('JSON-LD lists the services in an OfferCatalog without prices', () => {
     const data = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
     const biz = data['@graph'].find((i) => i['@type'] === 'ProfessionalService');
     const names = biz?.hasOfferCatalog?.itemListElement?.map((o) => o.itemOffered?.name) ?? [];
-    for (const s of ['Managed Microsoft 365', 'Microsoft 365 Security Hardening', 'Microsoft Copilot Readiness', 'Azure and AI Workloads', 'Licensing and Renewals', 'Microsoft CSP Partner Services']) {
+    for (const s of [
+      'Azure AI Projects',
+      'AI Agents and Automation',
+      'Private AI Inference',
+      'Microsoft Copilot Readiness',
+      'Managed Microsoft 365',
+      'Microsoft 365 Security Hardening',
+      'Licensing and Renewals',
+      'Microsoft CSP Partner Services',
+    ]) {
       assert.ok(names.includes(s), `OfferCatalog missing "${s}" (has: ${names.join(', ')})`);
     }
+    assert.ok(names.indexOf('Azure AI Projects') < names.indexOf('Managed Microsoft 365'), 'AI services listed first');
     assert.doesNotMatch(JSON.stringify(biz), /"price|priceRange|priceSpecification/);
   });
 });

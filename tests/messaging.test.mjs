@@ -45,11 +45,14 @@ describe('messaging brief: homepage structure', () => {
   const text = readableText(html);
   const h1 = readableText(html.match(/<h1[\s\S]*?<\/h1>/i)?.[0] ?? '');
 
-  test('h1 carries the core positioning: managed, at Microsoft\'s price', () => {
-    assert.match(h1, /Microsoft 365/);
-    assert.match(h1, /Azure/);
-    assert.match(h1, /managed/i);
-    assert.match(h1, /Microsoft's own price|same price/i);
+  test('h1 leads on building AI projects on Azure', () => {
+    assert.match(h1, /Azure AI/i);
+    assert.match(h1, /(built and run|design)/i);
+  });
+
+  test('the "same price as Microsoft" positioning is still on the page', () => {
+    assert.match(text, /same price/i);
+    assert.match(text, /Cloud Solution Provider/);
   });
 
   test('sells a managed service, not a one-person show', () => {
@@ -59,15 +62,15 @@ describe('messaging brief: homepage structure', () => {
     assert.equal(hit, null, `one-person framing: "${hit && context(text, hit.index)}"`);
   });
 
-  test('the four value pillars appear in order (headings may add keywords around them)', () => {
+  test('the Microsoft foundation pillars survive, in order, below the AI story', () => {
+    const lower = text.toLowerCase();
     const pillars = [
       'correct from day one',
       'security you already paid for, switched on',
       'accountable service, not a ticket queue',
-      'built and run for you',
     ];
-    const lower = text.toLowerCase();
-    let last = -1;
+    let last = lower.indexOf('azure ai');
+    assert.ok(last > -1, 'AI story must come first');
     for (const p of pillars) {
       const i = lower.indexOf(p, last + 1);
       assert.ok(i > last, `pillar "${p}" missing or out of order`);

@@ -102,20 +102,33 @@ describe('Azure and AI pillar', () => {
     assert.match(t, /no additional cost beyond your Azure invoice/i);
   });
 
-  test('covers Microsoft Copilot readiness', () => {
-    assert.match(visibleText(ai), /Copilot readiness/i);
+  test('covers Microsoft Copilot readiness somewhere on the page', () => {
+    assert.match(visibleText(html), /Copilot readiness/i);
   });
 
-  test('offers local inference clusters on open-source models with agentic workloads', () => {
-    const t = visibleText(ai);
+  test('AI agents and automation have their own section', () => {
+    const agents = sectionById(html, 'ai-agents');
+    assert.ok(agents, 'section#ai-agents missing');
+    const t = visibleText(agents);
+    assert.match(t, /agents?/i);
+    assert.match(t, /(your own data|your data)/i);
+  });
+
+  test('private AI section offers on-premises inference on open-source models', () => {
+    const priv = sectionById(html, 'private-ai');
+    assert.ok(priv, 'section#private-ai missing');
+    const t = visibleText(priv);
     assert.match(t, /(local|private|on-premises) inference/i);
     assert.match(t, /open-source models/i);
-    assert.match(t, /agentic/i);
   });
 
-  test('Azure offering appears before local inference', () => {
-    const t = visibleText(ai);
-    assert.ok(t.search(/Azure/) < t.search(/(local|private|on-premises) inference/i));
+  test('managed Microsoft 365 remains as a supporting section', () => {
+    const managed = sectionById(html, 'managed');
+    assert.ok(managed, 'section#managed missing');
+    const t = visibleText(managed);
+    assert.match(t, /Microsoft 365/);
+    assert.match(t, /(licen[cs]ing|licences)/i);
+    assert.match(t, /security/i);
   });
 });
 
