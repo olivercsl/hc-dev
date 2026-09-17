@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEQY09N6EE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEQY09N6EE');
+</script>
 <title>Azure, AWS and AI Projects Sydney | Harbour Cloud</title>
 <meta name="description" content="Sydney reseller and MSP for Azure, Microsoft 365 and AWS, with an AI focus. AI projects designed, built and run for Australian firms, plus private AI.">
 <link rel="canonical" href="https://harbourcloud.com.au/">
@@ -937,6 +945,19 @@
 
   window.addEventListener('resize', () => {
     if (window.innerWidth > 1024) closeMobileMenu();
+  });
+
+  // Measure enquiry intent: which section an email click came from, and which template.
+  document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (typeof gtag !== 'function') return;
+      const href = link.getAttribute('href');
+      const subject = decodeURIComponent((href.match(/subject=([^&]*)/) || ['', 'direct email'])[1]).replace(/\+/g, ' ');
+      gtag('event', 'contact_email_click', {
+        section: link.closest('section')?.id ?? 'unknown',
+        enquiry_type: subject,
+      });
+    });
   });
 
   const observer = new IntersectionObserver((entries) => {
