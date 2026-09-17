@@ -163,6 +163,14 @@ describe('business details', () => {
     }
   });
 
+  test('every page uses the owner email, with no leftover hello@ address', () => {
+    for (const page of PAGES) {
+      const html = read(page);
+      assert.doesNotMatch(html, /hello@harbourcloud\.com\.au/, `${page}: old hello@ address`);
+      assert.match(html, /oliver@harbourcloud\.com\.au/, `${page}: owner email missing`);
+    }
+  });
+
   test('registered address is Three International Towers, Barangaroo', () => {
     const html = read('index.html');
     assert.match(visibleText(html), /300 Barangaroo Avenue/);
@@ -188,7 +196,7 @@ describe('calls to action (email only for now)', () => {
     const contact = sectionById(html, 'contact');
     assert.ok(contact, 'section#contact missing');
     assert.doesNotMatch(html, /<form[\s>]/i);
-    const mailto = contact.match(/href="(mailto:hello@harbourcloud\.com\.au\?[^"]+)"/)?.[1];
+    const mailto = contact.match(/href="(mailto:oliver@harbourcloud\.com\.au\?[^"]+)"/)?.[1];
     assert.ok(mailto, 'no mailto with subject/body');
     const body = decodeURIComponent(mailto.replace(/&amp;/g, '&'));
     for (const field of [/Name/, /Company/, /Staff count/, /Current Microsoft setup/, /on your mind/]) assert.match(body, field);
