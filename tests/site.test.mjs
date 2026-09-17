@@ -68,11 +68,13 @@ describe('brief constraints: no pricing, discounts, suppliers or AI token resell
 });
 
 describe('Australian English', () => {
+  // Vendor product names keep their own spelling (AWS Organizations is what AWS calls it).
+  const PRODUCT_NAMES = /\bAWS Organizations?\b|\bOrganizations? unit\b/gi;
   const US = /\b(optimiz\w*|organiz\w*|analyz\w*|customiz\w*|prioritiz\w*|minimiz\w*|maximiz\w*|moderniz\w*|centraliz\w*|standardiz\w*|authoriz\w*|specializ\w*|utiliz\w*|centers?|colors?|behaviors?|favorites?|honors?|licenses)\b/i;
   const LICENCE_NOUN = /\blicense\s+(audit|savings?|management|renewals?|costs?|lifecycle|types?|count)\b/i;
   for (const page of PAGES) {
     test(page, () => {
-      const text = readableText(read(page));
+      const text = readableText(read(page)).replace(PRODUCT_NAMES, ' ');
       for (const re of [US, LICENCE_NOUN]) {
         const hit = text.match(re);
         assert.equal(hit, null, `${page}: US spelling "${hit?.[0]}"`);
@@ -90,7 +92,7 @@ describe('Azure and AI pillar', () => {
     assert.match(html.match(/<nav[\s\S]*?<\/nav>/i)[0], /href="#azure-ai"/);
   });
 
-  test('Azure and AI workloads designed, built and run, included, with predictable cost', () => {
+  test('Azure and AI workloads designed, built and run, with predictable cost', () => {
     const t = visibleText(ai);
     assert.match(t, /Azure OpenAI/);
     assert.match(t, /Foundry/);
@@ -98,8 +100,23 @@ describe('Azure and AI pillar', () => {
     assert.match(t, /build/i);
     assert.match(t, /(operate|run)/i);
     assert.match(t, /(cost governance|predictable)/i);
-    assert.match(t, /\bincluded\b/i);
-    assert.match(t, /no additional cost beyond your Azure invoice/i);
+  });
+
+  test('no free-management claims anywhere on the page', () => {
+    const text = visibleText(html);
+    const claims = [
+      /management is included/i,
+      /no additional cost/i,
+      /no extra (cost|fee|charge)/i,
+      /included when you run Azure/i,
+      /at no cost/i,
+      /free of charge/i,
+      /management (is )?free/i,
+    ];
+    for (const re of claims) {
+      const hit = text.match(re);
+      assert.equal(hit, null, `free-MSP claim on the page: "${hit && text.slice(Math.max(0, hit.index - 60), hit.index + 60)}"`);
+    }
   });
 
   test('covers Microsoft Copilot readiness somewhere on the page', () => {

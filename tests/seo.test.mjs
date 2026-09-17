@@ -25,9 +25,10 @@ const h2s = [...html.matchAll(/<h2[\s\S]*?<\/h2>/gi)].map((m) => strip(m[0]));
 const body = strip(html);
 
 describe('homepage keyword placement (AI-led)', () => {
-  test('title targets Azure AI delivery in Sydney', () => {
-    assert.match(title, /Azure AI/);
-    assert.match(title, /(Development|Projects|Consulting)/);
+  test('title covers Azure, AWS and AI in Sydney', () => {
+    assert.match(title, /Azure/);
+    assert.match(title, /AWS/);
+    assert.match(title, /AI/);
     assert.match(title, /Sydney/);
     assert.match(title, /Harbour Cloud/);
   });
@@ -39,8 +40,10 @@ describe('homepage keyword placement (AI-led)', () => {
     assert.match(description, /(private|on-premises)/i);
   });
 
-  test('h1 leads with Azure AI projects', () => {
-    assert.match(h1, /^Azure AI projects/i);
+  test('h1 leads with AI projects on both clouds', () => {
+    assert.match(h1, /^AI projects/i);
+    assert.match(h1, /Azure/);
+    assert.match(h1, /AWS/);
     assert.match(h1, /(built and run|design)/i);
   });
 
@@ -51,7 +54,8 @@ describe('homepage keyword placement (AI-led)', () => {
       /AI agents/i,
       /(private|on-premises) AI/i,
       /Copilot/i,
-      /Managed Microsoft 365/i,
+      /(Microsoft 365 licensing|Managed Microsoft 365|Microsoft licensing)/i,
+      /\bAWS\b/,
       /Microsoft CSP partner/i,
       /financial services/i,
       /AI and Azure expert|AI expert/i,
@@ -62,7 +66,7 @@ describe('homepage keyword placement (AI-led)', () => {
 
   test('AI clusters lead the page, Microsoft foundation follows', () => {
     const firstAi = body.search(/Azure AI/i);
-    const firstManaged = body.search(/Managed Microsoft 365/i);
+    const firstManaged = body.search(/Microsoft 365 licensing|Managed Microsoft 365/i);
     assert.ok(firstAi > -1 && firstManaged > -1, 'both themes must appear');
     assert.ok(firstAi < firstManaged, 'AI must appear before managed Microsoft 365');
   });
@@ -74,7 +78,7 @@ describe('homepage keyword placement (AI-led)', () => {
   });
 
   test('body keeps the Microsoft supporting terms', () => {
-    for (const kw of [/Business Premium/, /\bE3\b/, /\bE5\b/, /Essential Eight/, /conditional access/i, /Intune/, /Entra ID/, /Purview/, /security review/i, /Copilot readiness/i, /Sydney/, /Australia/]) {
+    for (const kw of [/Business Premium/, /\bE3\b/, /\bE5\b/, /Essential Eight/, /conditional access/i, /Intune/, /Entra ID/, /Purview/, /security review/i, /Copilot readiness/i, /Sydney/, /Australia/, /\bAWS\b/, /reseller/i, /(AWS accounts|AWS billing|AWS cost)/i]) {
       assert.match(body, kw, `body missing ${kw}`);
     }
   });

@@ -35,7 +35,7 @@ const context = (text, index) => text.slice(Math.max(0, index - 50), index + 50)
 
 const RULES = [
   [/—|\s–\s/, 'em dash (or spaced en dash used as a dash)'],
-  [/\b(cheapest|cheap|discount(s|ed)?|reseller|resell(ing)?|bulk licen[cs]es?|price[- ]match(ing)?)\b/i, 'wrong-reader word'],
+  [/\b(cheapest|cheap|discount(s|ed)?|bulk licen[cs]es?|price[- ]match(ing)?)\b/i, 'wrong-reader word'],
   [/\b(best deals?|great deals?|a deal on|deals)\b/i, '"deal" as in bargain'],
   [/\b(digital transformation|synerg(y|ies)|best[- ]in[- ]class|world[- ]class|cutting[- ]edge|seamless(ly)?)\b/i, 'buzzword'],
 ];
@@ -45,14 +45,27 @@ describe('messaging brief: homepage structure', () => {
   const text = readableText(html);
   const h1 = readableText(html.match(/<h1[\s\S]*?<\/h1>/i)?.[0] ?? '');
 
-  test('h1 leads on building AI projects on Azure', () => {
-    assert.match(h1, /Azure AI/i);
+  test('h1 leads on building AI projects', () => {
+    assert.match(h1, /AI projects/i);
+    assert.match(h1, /(Azure|AWS)/);
     assert.match(h1, /(built and run|design)/i);
   });
 
-  test('the "same price as Microsoft" positioning is still on the page', () => {
-    assert.match(text, /same price/i);
+  test('positions as a reseller plus MSP across Azure, Microsoft licensing and AWS', () => {
+    assert.match(text, /reseller/i);
     assert.match(text, /Cloud Solution Provider/);
+    assert.match(text, /\bAWS\b/);
+    assert.match(text, /Azure/);
+    assert.match(text, /licen[cs]ing/i);
+  });
+
+  test('a small, fast-moving team with an AI focus', () => {
+    assert.match(text, /small( and senior| senior)? team|small team/i);
+    assert.match(text, /fast|quick/i);
+  });
+
+  test('reinforces cost-effectiveness and efficiency without price talk', () => {
+    assert.match(text, /cost[- ]effective|efficien/i);
   });
 
   test('hero opens the conversation from the customer\'s pain points', () => {
@@ -94,10 +107,10 @@ describe('messaging brief: homepage structure', () => {
     for (const w of [/Defender/, /Intune/, /Entra/, /Purview/, /MFA/, /conditional access/i, /device compliance/i, /audit-ready/i]) assert.match(text, w);
   });
 
-  test('explains buying through a CSP partner costs the same as direct', () => {
+  test('explains what buying cloud through Harbour Cloud adds, without price talk', () => {
     assert.match(html, /\sid="why-csp"/);
     assert.match(text, /Cloud Solution Provider/);
-    assert.match(text, /same (price|cost) as buying (from Microsoft )?direct/i);
+    assert.doesNotMatch(text, /\bpricing\b/i);
   });
 
   test('speaks to the audience without publishing the staff-count range', () => {
