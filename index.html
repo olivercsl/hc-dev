@@ -12,6 +12,14 @@
 <meta property="og:title" content="AI projects, designed, built and run on Azure and AWS">
 <meta property="og:description" content="A small, fast-moving Sydney team: Azure, Microsoft 365 licensing and AWS supplied and managed, with AI projects built on top.">
 <meta property="og:url" content="https://harbourcloud.com.au/">
+<meta property="og:image" content="https://harbourcloud.com.au/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Harbour Cloud: AI projects designed, built and run on Azure and AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI projects, designed, built and run on Azure and AWS">
+<meta name="twitter:description" content="A small, fast-moving Sydney team: Azure, Microsoft 365 licensing and AWS supplied and managed, with AI projects built on top.">
+<meta name="twitter:image" content="https://harbourcloud.com.au/assets/og-image.png">
 <link rel="icon" type="image/png" href="assets/favicon-large.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,6 +81,55 @@
       "name": "Harbour Cloud",
       "inLanguage": "en-AU",
       "publisher": { "@id": "https://harbourcloud.com.au/#business" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://harbourcloud.com.au/#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can you take over our existing AWS accounts?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is an administrative change, not a rebuild. Billing moves under AWS Organizations and management moves to us, while your workloads, data and architecture stay exactly where they are. No downtime, nothing to re-deploy." }
+    },
+    {
+      "@type": "Question",
+      "name": "What changes if we buy Microsoft licences through you?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We become the Cloud Solution Provider on your subscriptions, so licences, renewals and seat changes come through one Australian team. Your tenant, data and users stay where they are, and we take on administration and the security baseline." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do we need to migrate our Microsoft 365 tenant?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Moving to Harbour Cloud transfers billing and administration only. Nothing is rebuilt, no mailboxes move, and your people notice nothing on the day it happens." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which Microsoft 365 plan do we need, Business Premium, E3 or E5?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It depends on how your people actually work. Business Premium already includes Defender, Intune, Entra ID and Purview for most smaller firms, while E3 and E5 suit larger tenants and stricter compliance obligations. We review what you own against what you use, then right-size it before renewal." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you keep Azure and AWS costs under control?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cost governance is part of the build rather than an afterthought: budgets, alerts, tagging, right-sized resources and commitment planning, plus a Well-Architected review on AWS. You can see where the spend goes and why." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are we ready for Microsoft 365 Copilot?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Copilot surfaces whatever a person can already reach, so oversharing and stale permissions are the usual blockers. We run a readiness review across permissions, sensitivity labels and licensing first, then switch it on." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can AI run on our own infrastructure instead of a public cloud?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. For data that cannot leave your premises we design and run private, on-premises inference clusters on open-source models, then build the same agentic workloads on top. Everything stays on your network." }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly can you start?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Quickly. We are a small senior team, so discovery usually starts within days, and a proof of concept on your own data follows in weeks rather than quarters." }
     }
   ]
 }
@@ -289,6 +346,13 @@
   .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
   .chip { background: var(--surface); border: 1px solid var(--border); padding: 9px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--text); }
   .fit-note { margin-top: 28px; font-size: 15px; color: var(--muted); max-width: 720px; }
+
+  /* ── FAQ ── */
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 44px; }
+  .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 28px; box-shadow: var(--shadow); }
+  .faq-item h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.35; }
+  .faq-item p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  @media (max-width: 1024px) { .faq-grid { grid-template-columns: 1fr; } }
   .about-text p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
   .trust-items { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
   .trust-item {
@@ -439,8 +503,10 @@
   <a href="#contact" class="btn-mobile-cta" onclick="closeMobileMenu()">Talk to an expert →</a>
 </div>
 
+<main id="content">
+
 <!-- HERO -->
-<section class="hero" id="home">
+<section class="hero" id="home" aria-labelledby="home-title">
   <div class="hero-grid">
     <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
@@ -469,7 +535,7 @@
     <div class="hero-two-col">
       <div>
         <div class="hero-badge">Azure, Microsoft 365 and AWS, with an AI focus</div>
-        <h1>AI projects, designed, built and run on <span>Azure and AWS.</span></h1>
+        <h1 id="home-title">AI projects, designed, built and run on <span>Azure and AWS.</span></h1>
         <p class="hero-sub">AI can accelerate almost any business. If you have pain points, we are all ears. Tell us where the work piles up, and we will work out what AI can take on, build it in your own cloud accounts, and keep it running. We are a small team that moves fast and gets things done at a reasonable price.</p>
         <div class="hero-ctas">
           <a href="#contact" class="btn-primary">Talk to an expert →</a>
@@ -506,10 +572,10 @@
 </section>
 
 <!-- AZURE AI -->
-<section class="bg-surface" id="azure-ai">
+<section class="bg-surface" id="azure-ai" aria-labelledby="azure-ai-title">
   <div class="section-inner">
     <div class="section-label">Azure AI projects</div>
-    <h2 class="section-title">Azure AI development, from use case to production</h2>
+    <h2 class="section-title" id="azure-ai-title">Azure AI development, from use case to production</h2>
     <p class="section-sub">Start with your problem, not the technology. We design, build and operate AI workloads on Azure OpenAI and Azure AI Foundry, deployed into your own Azure subscription with Entra ID, network controls and monitoring. Cost governance is part of the build, so spend stays predictable and the architecture stays cost-effective.</p>
     <div class="cards-grid fade-up">
       <div class="card card--featured">
@@ -536,10 +602,10 @@
 </section>
 
 <!-- AI AGENTS -->
-<section id="ai-agents">
+<section id="ai-agents" aria-labelledby="ai-agents-title">
   <div class="section-inner">
     <div class="section-label">AI agents and automation</div>
-    <h2 class="section-title">AI agents and automation on your own data</h2>
+    <h2 class="section-title" id="ai-agents-title">AI agents and automation on your own data</h2>
     <p class="section-sub">Most useful AI work is not a chatbot. It is an agent that reads, checks and acts on the documents and systems your firm already runs on, with a person in the loop where it matters.</p>
     <div class="cards-grid fade-up">
       <div class="card">
@@ -562,10 +628,10 @@
 </section>
 
 <!-- PRIVATE AI -->
-<section class="dark" id="private-ai">
+<section class="dark" id="private-ai" aria-labelledby="private-ai-title">
   <div class="section-inner">
     <div class="section-label">Private AI</div>
-    <h2 class="section-title">Private and on-premises AI for regulated data</h2>
+    <h2 class="section-title" id="private-ai-title">Private and on-premises AI for regulated data</h2>
     <p class="section-sub">When data cannot leave your premises, the AI comes to the data. We design and run local inference clusters on open-source models, then build the same agentic workloads on top.</p>
     <div class="cards-grid fade-up">
       <div class="card">
@@ -588,10 +654,10 @@
 </section>
 
 <!-- READINESS AND COPILOT -->
-<section class="bg-surface" id="copilot">
+<section class="bg-surface" id="copilot" aria-labelledby="copilot-title">
   <div class="section-inner">
     <div class="section-label">Readiness and governance</div>
-    <h2 class="section-title">AI readiness, governance and Microsoft 365 Copilot</h2>
+    <h2 class="section-title" id="copilot-title">AI readiness, governance and Microsoft 365 Copilot</h2>
     <p class="section-sub">Before AI touches your business data, the permissions and governance underneath it have to be right. This is where most stalled projects come unstuck.</p>
     <div class="two-col fade-up">
       <div>
@@ -619,10 +685,10 @@
 </section>
 
 <!-- MANAGED MICROSOFT 365 (SUPPORTING) -->
-<section id="managed">
+<section id="managed" aria-labelledby="managed-title">
   <div class="section-inner">
     <div class="section-label">Cloud and licensing</div>
-    <h2 class="section-title">Azure, Microsoft 365 licensing and AWS, managed</h2>
+    <h2 class="section-title" id="managed-title">Azure, Microsoft 365 licensing and AWS, managed</h2>
     <p class="section-sub">We are a reseller and managed service provider: we supply Azure, Microsoft 365 licences and AWS, and run them day to day. A small, senior team that moves fast, keeps environments tidy and keeps cloud spend cost-effective.</p>
     <div class="cards-grid fade-up">
       <div class="card card--featured">
@@ -665,10 +731,10 @@
 </section>
 
 <!-- WHY A CSP PARTNER -->
-<section class="bg-surface" id="why-csp">
+<section class="bg-surface" id="why-csp" aria-labelledby="why-csp-title">
   <div class="section-inner">
     <div class="section-label">Why a CSP partner</div>
-    <h2 class="section-title">Why buy your cloud through a Microsoft CSP partner and AWS reseller?</h2>
+    <h2 class="section-title" id="why-csp-title">Why buy your cloud through a Microsoft CSP partner and AWS reseller?</h2>
     <p class="section-sub">Microsoft sells its subscriptions directly and through Cloud Solution Provider (CSP) partners. AWS sells directly and through resellers. Buying through Harbour Cloud puts one Australian team between you and both platforms: licences supplied, accounts and environments managed, projects delivered.</p>
     <div class="compare-wrap fade-up">
       <table class="compare">
@@ -690,10 +756,10 @@
 </section>
 
 <!-- WHO WE WORK WITH -->
-<section id="who">
+<section id="who" aria-labelledby="who-title">
   <div class="section-inner">
     <div class="section-label">Who we work with</div>
-    <h2 class="section-title">AI for financial services and regulated firms</h2>
+    <h2 class="section-title" id="who-title">AI for financial services and regulated firms</h2>
     <p class="section-sub">Australian firms that run on Microsoft 365, hold sensitive client information, and want AI adopted carefully rather than loudly. Many work in regulated, security-conscious sectors where an AI mistake is a compliance problem, not just an embarrassment.</p>
     <div class="chips fade-up">
       <span class="chip">Financial services</span>
@@ -707,10 +773,10 @@
 </section>
 
 <!-- ABOUT -->
-<section class="bg-surface" id="about">
+<section class="bg-surface" id="about" aria-labelledby="about-title">
   <div class="section-inner">
     <div class="section-label">About</div>
-    <h2 class="section-title">Harbour Cloud, Microsoft CSP partner in Sydney</h2>
+    <h2 class="section-title" id="about-title">Harbour Cloud, Microsoft CSP partner in Sydney</h2>
     <div class="two-col fade-up" style="align-items:center;">
       <div class="about-text">
         <p>Harbour Cloud is an Australian reseller and managed service provider based in Sydney. We supply and manage Azure, Microsoft 365 licensing and AWS as a Microsoft Cloud Solution Provider, and we build AI projects on top of them.</p>
@@ -740,11 +806,54 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq" aria-labelledby="faq-title">
+  <div class="section-inner">
+    <div class="section-label">Questions</div>
+    <h2 class="section-title" id="faq-title">Questions we get asked</h2>
+    <p class="section-sub">The practical ones, answered plainly. If yours is not here, ask us.</p>
+    <div class="faq-grid fade-up">
+      <div class="faq-item">
+        <h3>Can you take over our existing AWS accounts?</h3>
+        <p>Yes. It is an administrative change, not a rebuild. Billing moves under AWS Organizations and management moves to us, while your workloads, data and architecture stay exactly where they are. No downtime, nothing to re-deploy.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What changes if we buy Microsoft licences through you?</h3>
+        <p>We become the Cloud Solution Provider on your subscriptions, so licences, renewals and seat changes come through one Australian team. Your tenant, data and users stay where they are, and we take on administration and the security baseline.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do we need to migrate our Microsoft 365 tenant?</h3>
+        <p>No. Moving to Harbour Cloud transfers billing and administration only. Nothing is rebuilt, no mailboxes move, and your people notice nothing on the day it happens.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Which Microsoft 365 plan do we need, Business Premium, E3 or E5?</h3>
+        <p>It depends on how your people actually work. Business Premium already includes Defender, Intune, Entra ID and Purview for most smaller firms, while E3 and E5 suit larger tenants and stricter compliance obligations. We review what you own against what you use, then right-size it before renewal.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do you keep Azure and AWS costs under control?</h3>
+        <p>Cost governance is part of the build rather than an afterthought: budgets, alerts, tagging, right-sized resources and commitment planning, plus a Well-Architected review on AWS. You can see where the spend goes and why.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Are we ready for Microsoft 365 Copilot?</h3>
+        <p>Copilot surfaces whatever a person can already reach, so oversharing and stale permissions are the usual blockers. We run a readiness review across permissions, sensitivity labels and licensing first, then switch it on.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can AI run on our own infrastructure instead of a public cloud?</h3>
+        <p>Yes. For data that cannot leave your premises we design and run private, on-premises inference clusters on open-source models, then build the same agentic workloads on top. Everything stays on your network.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How quickly can you start?</h3>
+        <p>Quickly. We are a small senior team, so discovery usually starts within days, and a proof of concept on your own data follows in weeks rather than quarters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" aria-labelledby="contact-title">
   <div class="section-inner" style="text-align:center; max-width:680px;">
     <div class="section-label">Contact</div>
-    <h2 class="section-title">Talk to an AI and Azure expert</h2>
+    <h2 class="section-title" id="contact-title">Talk to an AI and Azure expert</h2>
     <p class="section-sub" style="margin:0 auto;">Tell us about the work that piles up, the pain points your people complain about, or the AI idea you are weighing up. We are all ears. You will hear back from a senior specialist, not a sales team, usually within one business day.</p>
     <div class="contact-box fade-up">
       <h3>Helpful to include</h3>
@@ -762,6 +871,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>

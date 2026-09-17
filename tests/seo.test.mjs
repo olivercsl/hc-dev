@@ -1,7 +1,7 @@
 // Keyword placement from seo/keyword-plan.md v2 (AI-led homepage map).
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -89,6 +89,75 @@ describe('homepage keyword placement (AI-led)', () => {
       const hits = (body.match(re) ?? []).length;
       assert.ok(hits / words < 0.03, `${re} appears ${hits} times in ${words} words`);
     }
+  });
+});
+
+describe('social sharing', () => {
+  test('Open Graph and Twitter image tags point at a real file', () => {
+    const image = html.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
+    assert.ok(image, 'og:image missing');
+    assert.match(image, /^https:\/\/harbourcloud\.com\.au\//, 'og:image must be an absolute URL');
+    const local = join(ROOT, image.replace('https://harbourcloud.com.au/', ''));
+    assert.ok(existsSync(local), `og:image file missing: ${local}`);
+    assert.ok(statSync(local).size < 500 * 1024, 'og:image over 500 KB');
+    assert.match(html, /<meta property="og:image:width" content="1200"/);
+    assert.match(html, /<meta property="og:image:height" content="630"/);
+    assert.ok(html.match(/<meta property="og:image:alt" content="([^"]{10,})"/), 'og:image:alt missing');
+    assert.match(html, /<meta name="twitter:card" content="summary_large_image"/);
+  });
+});
+
+describe('answers the questions people search', () => {
+  const faq = html.match(/<section[^>]*\sid="faq"[\s\S]*?<\/section>/i)?.[0];
+
+  test('an FAQ section exists with at least six questions', () => {
+    assert.ok(faq, 'section#faq missing');
+    const questions = [...faq.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/gi)].map((m) => strip(m[0]));
+    assert.ok(questions.length >= 6, `only ${questions.length} questions`);
+    assert.ok(questions.every((q) => q.includes('?')), `every FAQ heading should be a question: ${questions.join(' | ')}`);
+  });
+
+  test('FAQ covers the buying questions from the keyword plan', () => {
+    const t = strip(faq ?? '');
+    for (const kw of [/AWS account/i, /billing/i, /CSP|Cloud Solution Provider/, /migrat/i, /Business Premium|E3|E5/, /Copilot/i, /on-premises|private/i]) {
+      assert.match(t, kw, `FAQ missing ${kw}`);
+    }
+  });
+
+  test('FAQPage schema matches the visible questions', () => {
+    const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+    const graph = blocks.flatMap((b) => b['@graph'] ?? [b]);
+    const faqSchema = graph.find((i) => i['@type'] === 'FAQPage');
+    assert.ok(faqSchema, 'FAQPage schema missing');
+    const schemaQs = faqSchema.mainEntity.map((q) => q.name);
+    const visibleQs = [...(faq ?? '').matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/gi)].map((m) => strip(m[0]));
+    assert.equal(schemaQs.length, visibleQs.length, 'schema and visible question counts differ');
+    for (const q of visibleQs) assert.ok(schemaQs.includes(q), `schema missing visible question: ${q}`);
+    for (const a of faqSchema.mainEntity) assert.ok((a.acceptedAnswer?.text ?? '').length > 40, `answer too short for: ${a.name}`);
+  });
+});
+
+describe('crawlability and structure', () => {
+  test('page uses a main landmark and labelled sections', () => {
+    assert.match(html, /<main[\s>]/, 'no <main> landmark');
+    const sections = [...html.matchAll(/<section[^>]*>/g)];
+    const labelled = sections.filter((s) => /aria-labelledby=/.test(s[0]));
+    assert.ok(labelled.length >= sections.length - 1, `${sections.length - labelled.length} sections lack aria-labelledby`);
+  });
+
+  test('a 404 page exists and is noindex', () => {
+    const p = join(ROOT, '404.html');
+    assert.ok(existsSync(p), '404.html missing');
+    assert.match(readFileSync(p, 'utf8'), /<meta name="robots" content="noindex/);
+  });
+
+  test('sitemap lastmod is current', () => {
+    const xml = readFileSync(join(ROOT, 'sitemap.xml'), 'utf8');
+    const dates = [...xml.matchAll(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g)].map((m) => m[1]);
+    assert.ok(dates.length > 0, 'no lastmod dates');
+    const newest = dates.sort().at(-1);
+    const ageDays = (Date.now() - Date.parse(newest)) / 86400000;
+    assert.ok(ageDays < 30, `sitemap lastmod ${newest} is ${Math.round(ageDays)} days old`);
   });
 });
 

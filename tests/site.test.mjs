@@ -10,7 +10,9 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://harbourcloud.com.au/';
 const read = (f) => readFileSync(join(ROOT, f), 'utf8');
 const PAGES = readdirSync(ROOT).filter((f) => f.endsWith('.html'));
-const INDEXABLE = PAGES.filter((f) => f !== 'thank-you.html');
+// Pages that opt out of search (thank-you, 404) are held to a different standard.
+const isNoindex = (f) => /<meta name="robots" content="noindex/.test(read(f));
+const INDEXABLE = PAGES.filter((f) => !isNoindex(f));
 
 function visibleText(html) {
   return html
@@ -155,11 +157,11 @@ describe('business details', () => {
     for (const p of [/Azure/, /AWS/, /Alibaba Cloud/]) assert.match(t, p);
   });
 
-  test('every page shows the real ABN and no placeholder ABN', () => {
+  test('pages with a footer show the real ABN, and no page carries the placeholder', () => {
     for (const page of PAGES) {
       const html = read(page);
-      assert.match(html, /74 673 268 507/, `${page}: ABN missing`);
       assert.doesNotMatch(html, /12 345 678 901/, `${page}: placeholder ABN`);
+      if (/<footer|site-footer/.test(html)) assert.match(html, /74 673 268 507/, `${page}: ABN missing`);
     }
   });
 
