@@ -80,6 +80,11 @@ try {
   const payloads = [...requests.map((r) => `${r.url}\n${r.body}`), ...failures.map((f) => f.url)];
   const pageViewHits = payloads.filter((p) => collectRe.test(p) && /en=page_view/.test(p));
   results.push(['page_view hit sent', pageViewHits.length >= 1, `${pageViewHits.length} page_view hit(s)`]);
+  // Give Google time to answer before the tab tears down: a 204 is proof of acceptance,
+  // not merely of dispatch.
+  await sleep(3000);
+  const collectStatus = [...responses.entries()].find(([u]) => collectRe.test(u))?.[1];
+  results.push(['Google accepted the hit', collectStatus === 204 || collectStatus === 200, `HTTP ${collectStatus ?? 'no response captured before teardown'}`]);
   // GA4 batches follow-up events and often flushes them only on page unload, so the network is an
   // unreliable place to assert this. dataLayer proves our handler fired with the right parameters;
   // the page_view hits above already prove delivery to Google works.
