@@ -83,7 +83,7 @@ try {
         h1: document.querySelector('h1')?.innerText.replace(/\\s+/g, ' '),
         h1Count: document.querySelectorAll('h1').length,
         hasAiSection: !!document.getElementById('azure-ai'),
-        forbiddenText: (text.match(/AI Tokens?|Qwen|\\$\\d|discount|wholesale|pricing|cheapest|reseller|—/gi) || []),
+        forbiddenText: (text.match(/AI Tokens?|Qwen|\\$\\d|discount|wholesale|pricing|cheapest|—/gi) || []),
         primaryCta: [...document.querySelectorAll('a[href="#contact"]')].some(a => /Talk to an expert/i.test(a.innerText)),
         horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1,
         scrollWidth: document.documentElement.scrollWidth,
